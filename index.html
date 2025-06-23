@@ -12,23 +12,37 @@
     <div class="container">
         <header>
             <h1><i class="fas fa-filter"></i> URL Credential Filter</h1>
-            <p>Search through URLs with username:password patterns</p>
+            <p>Upload a file and search through URLs with username:password patterns</p>
         </header>
         
-        <div class="search-container">
+        <div class="upload-container">
+            <div class="upload-box">
+                <input type="file" id="fileInput" accept=".txt,.csv">
+                <label for="fileInput" class="upload-btn">
+                    <i class="fas fa-cloud-upload-alt"></i> Choose File
+                </label>
+                <span id="fileName">No file selected</span>
+            </div>
+        </div>
+        
+        <div class="search-container" id="searchSection" style="display: none;">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search by domain, username or password...">
-                <button id="searchBtn"><i class="fas fa-search"></i></button>
+                <input type="text" id="searchInput" placeholder="Search by domain (e.g. youtube, facebook)...">
+                <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
             </div>
             <div class="filter-options">
                 <label>
                     <input type="checkbox" id="showPasswords" checked>
                     Show Passwords
                 </label>
+                <label>
+                    <input type="checkbox" id="exactMatch">
+                    Exact domain match
+                </label>
             </div>
         </div>
         
-        <div class="results-container">
+        <div class="results-container" id="resultsContainer" style="display: none;">
             <div class="results-header">
                 <span class="count">0</span> results found
                 <button id="copyBtn" class="copy-btn"><i class="fas fa-copy"></i> Copy All</button>
@@ -36,8 +50,17 @@
             <div id="results" class="results-list"></div>
         </div>
         
+        <div class="instructions" id="instructions">
+            <h3>How to use:</h3>
+            <ol>
+                <li>Upload a text file containing URLs in format: <code>https://domain.com/:username:password</code></li>
+                <li>Enter a keyword (like "youtube") to filter URLs</li>
+                <li>Toggle options to show/hide passwords or use exact matching</li>
+            </ol>
+        </div>
+        
         <footer>
-            <p>Upload your text file with URLs to filter through the data</p>
+            <p>Note: All processing happens in your browser. No data is uploaded to any server.</p>
         </footer>
     </div>
 
