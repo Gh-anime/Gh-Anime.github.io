@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeMaster Hub - Ultimate Programming Resource</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --success: #4cc9f0;
+            --dark: #1e1e2e;
+            --darker: #161622;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --danger: #f72585;
+            --warning: #f8961e;
+            --info: #7209b7;
+            --border-radius: 8px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(30, 30, 46, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo i {
+            color: var(--success);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+            font-size: 1rem;
+            border: none;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-discord {
+            background: #5865F2;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-discord:hover {
+            background: #4752c4;
+            transform: translateY(-3px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--accent), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Languages Section */
+        .languages-section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .section-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .language-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .language-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent);
+        }
+
+        .language-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .javascript .language-icon { color: #f7df1e; }
+        .python .language-icon { color: #3776ab; }
+        .java .language-icon { color: #007396; }
+        .csharp .language-icon { color: #239120; }
+        .php .language-icon { color: #777bb4; }
+        .ruby .language-icon { color: #cc342d; }
+        .go .language-icon { color: #00add8; }
+        .swift .language-icon { color: #fa7343; }
+
+        .language-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .language-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .language-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 80px 0;
+        }
+
+        .resources-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-radius: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .resource-header {
+            padding: 20px;
+            background: rgba(67, 97, 238, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .resource-header i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .resource-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .resource-body {
+            padding: 20px;
+        }
+
+        .resource-body p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+
+        .resource-footer {
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .language-tag {
+            background: rgba(72, 149, 239, 0.2);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Code Snippet */
+        .code-container {
+            background: #1e1e1e;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .code-header {
+            padding: 12px 20px;
+            background: #252526;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #3c3c3c;
+        }
+
+        .code-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            color: #d4d4d4;
+        }
+
+        .code-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .code-btn {
+            background: #3c3c3c;
+            border: none;
+            color: #d4d4d4;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .code-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .code-content {
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        pre {
+            margin: 0;
+        }
+
+        /* Guides Section */
+        .guides-section {
+            padding: 80px 0;
+        }
+
+        .guides-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .guide-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .guide-level {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .beginner .guide-level { background: rgba(76, 201, 240, 0.2); color: var(--success); }
+        .intermediate .guide-level { background: rgba(114, 9, 183, 0.2); color: var(--info); }
+        .advanced .guide-level { background: rgba(248, 150, 30, 0.2); color: var(--warning); }
+
+        .guide-content {
+            padding: 25px;
+        }
+
+        .guide-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .guide-content p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .guide-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.9rem;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 20, 0.9);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--light);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links, .user-actions {
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .languages-section, .resources-section, .guides-section {
+                padding: 60px 0;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-laptop-code"></i>
+                    Code<span>Master</span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="#languages">Languages</a>
+                    <a href="#resources">Resources</a>
+                    <a href="#snippets">Snippets</a>
+                    <a href="#guides">Guides</a>
+                    <a href="#about">About</a>
+                </div>
+                
+                <div class="user-actions">
+                    <a href="https://discord.gg/ZrBzdsB7yf" target="_blank" class="btn btn-discord">
+                        <i class="fab fa-discord"></i> Join Discord
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Master Programming with Tools, Snippets & Examples</h1>
+            <p>Your ultimate resource for programming tools, code snippets, and learning resources for all levels. Created by GhostGamer (@ghstgmr)</p>
+            
+            <div class="hero-btns">
+                <a href="#languages" class="btn btn-primary">Explore Languages</a>
+                <a href="https://discord.gg/ZrBzdsB7yf" target="_blank" class="btn btn-outline">
+                    <i class="fab fa-discord"></i> Join Our Community
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Languages Section -->
+    <section class="languages-section" id="languages">
+        <div class="container">
+            <div class="section-header">
+                <h2>Programming Languages</h2>
+                <p>Comprehensive resources for developers at all skill levels</p>
+            </div>
+            
+            <div class="languages-grid" id="languages-container">
+                <!-- Languages will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources-section" id="resources">
+        <div class="container">
+            <div class="section-header">
+                <h2>Development Resources</h2>
+                <p>Interactive tools, code snippets, and sample programs</p>
+            </div>
+            
+            <div class="resources-tabs">
+                <button class="tab-btn active" data-category="all">All Resources</button>
+                <button class="tab-btn" data-category="javascript">JavaScript</button>
+                <button class="tab-btn" data-category="python">Python</button>
+                <button class="tab-btn" data-category="java">Java</button>
+                <button class="tab-btn" data-category="csharp">C#</button>
+                <button class="tab-btn" data-category="php">PHP</button>
+            </div>
+            
+            <div class="resources-grid" id="resources-container">
+                <!-- Resources will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Snippets Section -->
+    <section class="resources-section" id="snippets">
+        <div class="container">
+            <div class="section-header">
+                <h2>Code Snippets</h2>
+                <p>Ready-to-use code snippets for common programming tasks</p>
+            </div>
+            
+            <div id="snippets-container">
+                <!-- Snippets will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Guides Section -->
+    <section class="guides-section" id="guides">
+        <div class="container">
+            <div class="section-header">
+                <h2>Learning Guides</h2>
+                <p>Step-by-step tutorials for all skill levels</p>
+            </div>
+            
+            <div class="guides-container" id="guides-container">
+                <!-- Guides will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="about">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>CodeMaster Hub</h3>
+                    <p>Your comprehensive resource for programming tools, code snippets, and learning materials.</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/ZrBzdsB7yf" target="_blank" class="social-link">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Languages</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-js"></i> JavaScript</a></li>
+                        <li><a href="#"><i class="fab fa-python"></i> Python</a></li>
+                        <li><a href="#"><i class="fab fa-java"></i> Java</a></li>
+                        <li><a href="#"><i class="fas fa-code"></i> C++</a></li>
+                        <li><a href="#"><i class="fab fa-php"></i> PHP</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Tools</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Snippets</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Sample Programs</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Cheat Sheets</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Community</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://discord.gg/ZrBzdsB7yf" target="_blank"><i class="fab fa-discord"></i> Discord Server</a></li>
+                        <li><a href="#"><i class="fab fa-github"></i> GitHub Repository</a></li>
+                        <li><a href="#"><i class="fas fa-comments"></i> Forums</a></li>
+                        <li><a href="#"><i class="fas fa-hands-helping"></i> Contribute</a></li>
+                        <li><a href="#"><i class="fas fa-bug"></i> Report Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>Created by GhostGamer (@ghstgmr) | &copy; 2023 CodeMaster Hub. All rights reserved.</p>
+                <p>Join our community: <a href="https://discord.gg/ZrBzdsB7yf" target="_blank">discord.gg/ZrBzdsB7yf</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Backend Simulation - Data Storage and API
+        const backendAPI = {
+            // Database simulation
+            languages: [
+                {
+                    id: 1,
+                    name: "JavaScript",
+                    icon: "fab fa-js",
+                    color: "#f7df1e",
+                    description: "The language of the web. Used for frontend, backend, and mobile development.",
+                    snippets: 20,
+                    samples: 15,
+                    guides: 5
+                },
+                {
+                    id: 2,
+                    name: "Python",
+                    icon: "fab fa-python",
+                    color: "#3776ab",
+                    description: "Versatile language for web development, data science, AI, and automation.",
+                    snippets: 22,
+                    samples: 12,
+                    guides: 6
+                },
+                {
+                    id: 3,
+                    name: "Java",
+                    icon: "fab fa-java",
+                    color: "#007396",
+                    description: "Object-oriented language used for enterprise applications and Android development.",
+                    snippets: 18,
+                    samples: 10,
+                    guides: 5
+                },
+                {
+                    id: 4,
+                    name: "C#",
+                    icon: "fas fa-copyright",
+                    color: "#239120",
+                    description: "Modern language for Windows applications, games with Unity, and enterprise software.",
+                    snippets: 15,
+                    samples: 8,
+                    guides: 4
+                },
+                {
+                    id: 5,
+                    name: "PHP",
+                    icon: "fab fa-php",
+                    color: "#777bb4",
+                    description: "Server-side scripting language especially suited to web development.",
+                    snippets: 16,
+                    samples: 9,
+                    guides: 5
+                },
+                {
+                    id: 6,
+                    name: "Ruby",
+                    icon: "fas fa-gem",
+                    color: "#cc342d",
+                    description: "Dynamic, open source language with a focus on simplicity and productivity.",
+                    snippets: 14,
+                    samples: 7,
+                    guides: 4
+                },
+                {
+                    id: 7,
+                    name: "Go",
+                    icon: "fab fa-golang",
+                    color: "#00add8",
+                    description: "Statically typed language developed at Google with a focus on concurrency.",
+                    snippets: 12,
+                    samples: 6,
+                    guides: 3
+                },
+                {
+                    id: 8,
+                    name: "Swift",
+                    icon: "fab fa-swift",
+                    color: "#fa7343",
+                    description: "Powerful and intuitive programming language for iOS, macOS, and more.",
+                    snippets: 10,
+                    samples: 5,
+                    guides: 3
+                }
+            ],
+            
+            resources: [
+                {
+                    id: 1,
+                    title: "JSON Formatter",
+                    icon: "fas fa-arrows-alt-h",
+                    description: "Format and validate your JSON data with syntax highlighting and error detection.",
+                    language: "JavaScript",
+                    url: "#"
+                },
+                {
+                    id: 2,
+                    title: "Password Generator",
+                    icon: "fas fa-lock",
+                    description: "Generate secure passwords with customizable length and character types.",
+                    language: "JavaScript",
+                    url: "#"
+                },
+                {
+                    id: 3,
+                    title: "Base64 Encoder/Decoder",
+                    icon: "fas fa-code",
+                    description: "Convert strings to Base64 and decode Base64 back to original format.",
+                    language: "Python",
+                    url: "#"
+                },
+                {
+                    id: 4,
+                    title: "Color Converter",
+                    icon: "fas fa-palette",
+                    description: "Convert between HEX, RGB, HSL, and other color formats with real-time preview.",
+                    language: "JavaScript",
+                    url: "#"
+                },
+                {
+                    id: 5,
+                    title: "Regex Tester",
+                    icon: "fas fa-terminal",
+                    description: "Test and debug regular expressions with live matching and explanation.",
+                    language: "JavaScript",
+                    url: "#"
+                },
+                {
+                    id: 6,
+                    title: "SQL Formatter",
+                    icon: "fas fa-database",
+                    description: "Format SQL queries with syntax highlighting and indentation.",
+                    language: "Java",
+                    url: "#"
+                }
+            ],
+            
+            snippets: [
+                {
+                    id: 1,
+                    title: "JavaScript: Fetch API with Error Handling",
+                    icon: "fab fa-js",
+                    language: "JavaScript",
+                    code: `async function fetchData(url) {
+  try {
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(\`HTTP error! status: \${response.status}\`);
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return null;
+  }
+}
+
+// Usage:
+const apiData = await fetchData('https://api.example.com/data');
+if (apiData) {
+  console.log('Data received:', apiData);
+}`
+                },
+                {
+                    id: 2,
+                    title: "Python: Read CSV File with Pandas",
+                    icon: "fab fa-python",
+                    language: "Python",
+                    code: `import pandas as pd
+
+def read_csv_file(file_path):
+    """
+    Reads a CSV file and returns a pandas DataFrame.
+    
+    Args:
+        file_path (str): Path to the CSV file
+        
+    Returns:
+        pd.DataFrame: DataFrame containing the CSV data
+    """
+    try:
+        df = pd.read_csv(file_path)
+        print(f"Successfully read {file_path}")
+        return df
+    except FileNotFoundError:
+        print(f"Error: File not found at {file_path}")
+        return None
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        return None
+
+# Usage example:
+data_frame = read_csv_file('data/sample.csv')
+if data_frame is not None:
+    print(data_frame.head())`
+                },
+                {
+                    id: 3,
+                    title: "Java: Read File Line by Line",
+                    icon: "fab fa-java",
+                    language: "Java",
+                    code: `import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class ReadFile {
+    public static void main(String[] args) {
+        String filePath = "path/to/your/file.txt";
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.err.println("An error occurred while reading the file: " + e.getMessage());
+        }
+    }
+}`
+                },
+                {
+                    id: 4,
+                    title: "Python: Flask REST API",
+                    icon: "fab fa-python",
+                    language: "Python",
+                    code: `from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+tasks = [
+    {'id': 1, 'title': 'Task 1', 'done': False},
+    {'id': 2, 'title': 'Task 2', 'done': True}
+]
+
+@app.route('/tasks', methods=['GET'])
+def get_tasks():
+    return jsonify({'tasks': tasks})
+
+@app.route('/tasks', methods=['POST'])
+def create_task():
+    if not request.json or not 'title' in request.json:
+        return jsonify({'error': 'Title is required'}), 400
+        
+    task = {
+        'id': tasks[-1]['id'] + 1,
+        'title': request.json['title'],
+        'done': False
+    }
+    tasks.append(task)
+    return jsonify({'task': task}), 201
+
+if __name__ == '__main__':
+    app.run(debug=True)`
+                }
+            ],
+            
+            guides: [
+                {
+                    id: 1,
+                    title: "JavaScript Fundamentals",
+                    level: "beginner",
+                    language: "JavaScript",
+                    description: "Learn the basics of JavaScript: variables, data types, functions, and control structures. Perfect for absolute beginners.",
+                    readTime: 45
+                },
+                {
+                    id: 2,
+                    title: "Python Data Analysis",
+                    level: "intermediate",
+                    language: "Python",
+                    description: "Master data manipulation with Pandas, visualization with Matplotlib, and basic statistical analysis.",
+                    readTime: 60
+                },
+                {
+                    id: 3,
+                    title: "Java Concurrency",
+                    level: "advanced",
+                    language: "Java",
+                    description: "Deep dive into Java's concurrency model: threads, executors, locks, and concurrent collections.",
+                    readTime: 90
+                },
+                {
+                    id: 4,
+                    title: "HTML & CSS Basics",
+                    level: "beginner",
+                    language: "Web",
+                    description: "Build your first website with HTML structure and CSS styling. Learn the fundamentals of web development.",
+                    readTime: 30
+                },
+                {
+                    id: 5,
+                    title: "React Hooks Guide",
+                    level: "intermediate",
+                    language: "JavaScript",
+                    description: "Master React hooks including useState, useEffect, useContext, and custom hooks with practical examples.",
+                    readTime: 55
+                },
+                {
+                    id: 6,
+                    title: "Docker for Developers",
+                    level: "intermediate",
+                    language: "DevOps",
+                    description: "Containerize your applications with Docker. Learn Dockerfiles, Docker Compose, and deployment strategies.",
+                    readTime: 70
+                }
+            ],
+            
+            // API methods
+            getLanguages: function() {
+                return this.languages;
+            },
+            
+            getResources: function(category = "all") {
+                if (category === "all") return this.resources;
+                return this.resources.filter(res => res.language.toLowerCase() === category);
+            },
+            
+            getSnippets: function() {
+                return this.snippets;
+            },
+            
+            getGuides: function() {
+                return this.guides;
+            }
+        };
+
+        // Frontend Application
+        const app = {
+            init: function() {
+                this.renderLanguages();
+                this.renderResources();
+                this.renderSnippets();
+                this.renderGuides();
+                this.setupEventListeners();
+            },
+            
+            renderLanguages: function() {
+                const container = document.getElementById('languages-container');
+                const languages = backendAPI.getLanguages();
+                
+                let html = '';
+                languages.forEach(lang => {
+                    html += `
+                    <div class="language-card ${lang.name.toLowerCase()}">
+                        <div class="language-icon" style="color: ${lang.color}">
+                            <i class="${lang.icon}"></i>
+                        </div>
+                        <h3>${lang.name}</h3>
+                        <p>${lang.description}</p>
+                        <div class="language-stats">
+                            <div class="stat">
+                                <div class="stat-value">${lang.snippets}+</div>
+                                <div class="stat-label">Snippets</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">${lang.samples}</div>
+                                <div class="stat-label">Samples</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">${lang.guides}</div>
+                                <div class="stat-label">Guides</div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+            },
+            
+            renderResources: function(category = "all") {
+                const container = document.getElementById('resources-container');
+                const resources = backendAPI.getResources(category);
+                
+                let html = '';
+                resources.forEach(res => {
+                    html += `
+                    <div class="resource-card">
+                        <div class="resource-header">
+                            <i class="${res.icon}"></i>
+                            <h3>${res.title}</h3>
+                        </div>
+                        <div class="resource-body">
+                            <p>${res.description}</p>
+                        </div>
+                        <div class="resource-footer">
+                            <div class="language-tag">${res.language}</div>
+                            <a href="${res.url}" class="btn btn-primary">Use Tool</a>
+                        </div>
+                    </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+            },
+            
+            renderSnippets: function() {
+                const container = document.getElementById('snippets-container');
+                const snippets = backendAPI.getSnippets();
+                
+                let html = '';
+                snippets.forEach(snip => {
+                    html += `
+                    <div class="code-container">
+                        <div class="code-header">
+                            <div class="code-title">
+                                <i class="${snip.icon}"></i>
+                                <span>${snip.title}</span>
+                            </div>
+                            <div class="code-actions">
+                                <button class="code-btn" data-code="${encodeURIComponent(snip.code)}"><i class="far fa-copy"></i></button>
+                                <button class="code-btn"><i class="far fa-star"></i></button>
+                            </div>
+                        </div>
+                        <div class="code-content">
+                            <pre><code>${snip.code}</code></pre>
+                        </div>
+                    </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+            },
+            
+            renderGuides: function() {
+                const container = document.getElementById('guides-container');
+                const guides = backendAPI.getGuides();
+                
+                let html = '';
+                guides.forEach(guide => {
+                    html += `
+                    <div class="guide-card ${guide.level}">
+                        <div class="guide-level">${guide.level.charAt(0).toUpperCase() + guide.level.slice(1)} Level</div>
+                        <div class="guide-content">
+                            <h3>${guide.title}</h3>
+                            <p>${guide.description}</p>
+                            <a href="#" class="btn btn-primary">Read Guide</a>
+                        </div>
+                        <div class="guide-meta">
+                            <span>${guide.language}</span>
+                            <span>${guide.readTime} min read</span>
+                        </div>
+                    </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+            },
+            
+            setupEventListeners: function() {
+                // Tab switching
+                const tabBtns = document.querySelectorAll('.tab-btn');
+                tabBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Remove active class from all buttons
+                        tabBtns.forEach(b => b.classList.remove('active'));
+                        // Add active class to clicked button
+                        btn.classList.add('active');
+                        // Filter resources
+                        this.renderResources(btn.dataset.category);
+                    });
+                });
+                
+                // Smooth scrolling for anchor links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        if(this.getAttribute('href') === '#') return;
+                        
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if(target) {
+                            window.scrollTo({
+                                top: target.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+                
+                // Copy button functionality
+                document.addEventListener('click', function(e) {
+                    if(e.target.closest('.code-btn .fa-copy') || e.target.closest('.code-btn')?.classList.contains('fa-copy')) {
+                        const btn = e.target.closest('.code-btn');
+                        const code = decodeURIComponent(btn.dataset.code);
+                        
+                        navigator.clipboard.writeText(code).then(() => {
+                            const icon = btn.querySelector('i') || btn;
+                            const original = icon.className;
+                            icon.className = 'fas fa-check';
+                            
+                            setTimeout(() => {
+                                icon.className = original;
+                            }, 2000);
+                        });
+                    }
+                });
+            }
+        };
+
+        // Initialize the app when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            app.init();
+        });
+    </script>
+</body>
+</html>
