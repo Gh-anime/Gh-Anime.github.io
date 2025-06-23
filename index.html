@@ -9,12 +9,14 @@
     <style>
         :root {
             --primary: #4361ee;
+            --primary-light: #5d7af0;
             --secondary: #3f37c9;
             --accent: #4895ef;
             --success: #4cc9f0;
             --dark: #1e1e2e;
             --darker: #161622;
             --light: #f8f9fa;
+            --light-bg: #ffffff;
             --gray: #6c757d;
             --danger: #f72585;
             --warning: #f8961e;
@@ -22,6 +24,27 @@
             --border-radius: 8px;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             --transition: all 0.3s ease;
+            
+            /* Theme variables */
+            --bg-gradient: linear-gradient(135deg, var(--darker), var(--dark));
+            --header-bg: rgba(30, 30, 46, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-hover-bg: rgba(255, 255, 255, 0.08);
+            --text-color: var(--light);
+            --secondary-text: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --footer-bg: rgba(10, 10, 20, 0.9);
+        }
+        
+        .light-theme {
+            --bg-gradient: linear-gradient(135deg, #f5f7fa, #e4e7f1);
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-hover-bg: rgba(255, 255, 255, 1);
+            --text-color: #2d3748;
+            --secondary-text: #4a5568;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --footer-bg: #f8f9fa;
         }
 
         * {
@@ -32,11 +55,12 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--darker), var(--dark));
-            color: var(--light);
+            background: var(--bg-gradient);
+            color: var(--text-color);
             line-height: 1.6;
             min-height: 100vh;
             padding-bottom: 60px;
+            transition: var(--transition);
         }
 
         .container {
@@ -48,13 +72,14 @@
 
         /* Header Styles */
         header {
-            background: rgba(30, 30, 46, 0.8);
+            background: var(--header-bg);
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 100;
             box-shadow: var(--shadow);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
         }
 
         .navbar {
@@ -71,8 +96,9 @@
             gap: 12px;
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--light);
+            color: var(--text-color);
             text-decoration: none;
+            transition: var(--transition);
         }
 
         .logo span {
@@ -90,7 +116,7 @@
         }
 
         .nav-links a {
-            color: var(--light);
+            color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
             font-size: 1.1rem;
@@ -145,8 +171,9 @@
         }
 
         .btn-primary:hover {
-            background: var(--secondary);
+            background: var(--primary-light);
             transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.3);
         }
 
         .btn-outline {
@@ -171,11 +198,32 @@
         .btn-discord:hover {
             background: #4752c4;
             transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(88, 101, 242, 0.3);
+        }
+        
+        .btn-theme {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .btn-theme:hover {
+            background: var(--primary);
+            color: white;
+            transform: rotate(15deg);
         }
 
         /* Hero Section */
         .hero {
-            padding: 80px 0 60px;
+            padding: 100px 0 60px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
@@ -192,7 +240,7 @@
 
         .hero p {
             font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--secondary-text);
             margin-bottom: 30px;
         }
 
@@ -217,11 +265,11 @@
         .section-header h2 {
             font-size: 2.5rem;
             margin-bottom: 15px;
-            color: var(--light);
+            color: var(--text-color);
         }
 
         .section-header p {
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--secondary-text);
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto;
@@ -234,20 +282,22 @@
         }
 
         .language-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             border-radius: var(--border-radius);
             padding: 30px;
             transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
             text-align: center;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .language-card:hover {
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.08);
+            background: var(--card-hover-bg);
             border-color: var(--accent);
+            box-shadow: var(--shadow);
         }
 
         .language-icon {
@@ -258,25 +308,27 @@
             align-items: center;
             justify-content: center;
             font-size: 2.5rem;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.1);
         }
 
-        .javascript .language-icon { color: #f7df1e; }
-        .python .language-icon { color: #3776ab; }
-        .java .language-icon { color: #007396; }
-        .csharp .language-icon { color: #239120; }
-        .php .language-icon { color: #777bb4; }
-        .ruby .language-icon { color: #cc342d; }
-        .go .language-icon { color: #00add8; }
-        .swift .language-icon { color: #fa7343; }
+        .javascript .language-icon { color: #f7df1e; background: rgba(247, 223, 30, 0.1); }
+        .python .language-icon { color: #3776ab; background: rgba(55, 118, 171, 0.1); }
+        .java .language-icon { color: #007396; background: rgba(0, 115, 150, 0.1); }
+        .csharp .language-icon { color: #239120; background: rgba(35, 145, 32, 0.1); }
+        .php .language-icon { color: #777bb4; background: rgba(119, 123, 180, 0.1); }
+        .ruby .language-icon { color: #cc342d; background: rgba(204, 52, 45, 0.1); }
+        .go .language-icon { color: #00add8; background: rgba(0, 173, 216, 0.1); }
+        .swift .language-icon { color: #fa7343; background: rgba(250, 115, 67, 0.1); }
 
         .language-card h3 {
             font-size: 1.8rem;
             margin-bottom: 15px;
-            color: var(--light);
+            color: var(--text-color);
         }
 
         .language-card p {
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--secondary-text);
             margin-bottom: 20px;
         }
 
@@ -285,7 +337,7 @@
             justify-content: space-around;
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border-color);
         }
 
         .stat {
@@ -302,181 +354,113 @@
             font-size: 0.9rem;
             color: var(--gray);
         }
-
-        /* Resources Section */
-        .resources-section {
-            background: rgba(0, 0, 0, 0.2);
+        
+        /* Language Detail View */
+        .language-detail {
             padding: 80px 0;
+            display: none;
         }
-
-        .resources-tabs {
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            color: var(--accent);
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .back-btn:hover {
+            color: var(--primary);
+        }
+        
+        .detail-header {
             display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .detail-icon {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            font-size: 3.5rem;
+            border-radius: 50%;
+        }
+        
+        .detail-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .detail-info p {
+            color: var(--secondary-text);
+            font-size: 1.2rem;
+            max-width: 800px;
+        }
+        
+        .language-tabs {
+            display: flex;
             gap: 10px;
             margin-bottom: 30px;
-            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
         }
-
-        .tab-btn {
+        
+        .tab {
             padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.05);
+            background: transparent;
             border: none;
             border-radius: 30px;
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--text-color);
             font-family: 'Poppins', sans-serif;
             font-weight: 500;
             cursor: pointer;
             transition: var(--transition);
         }
-
-        .tab-btn.active, .tab-btn:hover {
+        
+        .tab.active, .tab:hover {
             background: var(--primary);
             color: white;
         }
-
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+        
+        .tab-content {
+            display: none;
         }
-
-        .resource-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
         }
-
-        .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-            border-color: var(--accent);
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .resource-header {
-            padding: 20px;
-            background: rgba(67, 97, 238, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .resource-header i {
-            font-size: 1.5rem;
-            color: var(--accent);
-        }
-
-        .resource-header h3 {
-            font-size: 1.3rem;
-        }
-
-        .resource-body {
-            padding: 20px;
-        }
-
-        .resource-body p {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 15px;
-            min-height: 60px;
-        }
-
-        .resource-footer {
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .language-tag {
-            background: rgba(72, 149, 239, 0.2);
-            color: var(--accent);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        /* Code Snippet */
-        .code-container {
-            background: #1e1e1e;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            margin: 30px 0;
-            box-shadow: var(--shadow);
-        }
-
-        .code-header {
-            padding: 12px 20px;
-            background: #252526;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #3c3c3c;
-        }
-
-        .code-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1rem;
-            color: #d4d4d4;
-        }
-
-        .code-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .code-btn {
-            background: #3c3c3c;
-            border: none;
-            color: #d4d4d4;
-            width: 30px;
-            height: 30px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .code-btn:hover {
-            background: var(--accent);
-            color: white;
-        }
-
-        .code-content {
-            padding: 20px;
-            overflow-x: auto;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        pre {
-            margin: 0;
-        }
-
+        
         /* Guides Section */
-        .guides-section {
-            padding: 80px 0;
-        }
-
-        .guides-container {
+        .guides-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
         }
 
         .guide-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             border-radius: var(--border-radius);
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
         }
 
         .guide-level {
@@ -496,11 +480,11 @@
         .guide-content h3 {
             font-size: 1.5rem;
             margin-bottom: 15px;
-            color: var(--light);
+            color: var(--text-color);
         }
 
         .guide-content p {
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--secondary-text);
             margin-bottom: 20px;
         }
 
@@ -510,15 +494,76 @@
             color: var(--gray);
             font-size: 0.9rem;
             padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border-color);
         }
-
+        
+        /* Snippets Section */
+        .snippets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .snippet-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .snippet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
+        }
+        
+        .snippet-header {
+            padding: 15px 20px;
+            background: rgba(67, 97, 238, 0.1);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .snippet-header i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .snippet-header h3 {
+            font-size: 1.3rem;
+        }
+        
+        .snippet-content {
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            max-height: 300px;
+        }
+        
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .snippet-footer {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
         /* Footer */
         footer {
-            background: rgba(10, 10, 20, 0.9);
+            background: var(--footer-bg);
             padding: 60px 0 30px;
             margin-top: 60px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid var(--border-color);
+            transition: var(--transition);
         }
 
         .footer-grid {
@@ -531,7 +576,7 @@
         .footer-col h3 {
             font-size: 1.3rem;
             margin-bottom: 20px;
-            color: var(--light);
+            color: var(--text-color);
             position: relative;
             padding-bottom: 10px;
         }
@@ -555,7 +600,7 @@
         }
 
         .footer-links a {
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--secondary-text);
             text-decoration: none;
             transition: var(--transition);
             display: flex;
@@ -582,21 +627,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--light);
+            color: var(--text-color);
             transition: var(--transition);
             text-decoration: none;
         }
 
         .social-link:hover {
             background: var(--primary);
+            color: white;
             transform: translateY(-5px);
         }
 
         .copyright {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.4);
+            border-top: 1px solid var(--border-color);
+            color: var(--secondary-text);
             font-size: 0.9rem;
         }
 
@@ -631,6 +677,11 @@
             .section-header h2 {
                 font-size: 2rem;
             }
+            
+            .detail-header {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -639,107 +690,117 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">
+                <a href="#" class="logo" id="home-link">
                     <i class="fas fa-laptop-code"></i>
                     Code<span>Master</span>
                 </a>
                 
                 <div class="nav-links">
-                    <a href="#languages">Languages</a>
-                    <a href="#resources">Resources</a>
-                    <a href="#snippets">Snippets</a>
-                    <a href="#guides">Guides</a>
-                    <a href="#about">About</a>
+                    <a href="#" id="home-nav">Home</a>
+                    <a href="#" id="languages-nav">Languages</a>
+                    <a href="#" id="resources-nav">Resources</a>
+                    <a href="#" id="guides-nav">Guides</a>
+                    <a href="#" id="about-nav">About</a>
                 </div>
                 
                 <div class="user-actions">
                     <a href="https://discord.gg/ZrBzdsB7yf" target="_blank" class="btn btn-discord">
                         <i class="fab fa-discord"></i> Join Discord
                     </a>
+                    <button class="btn-theme" id="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Master Programming with Tools, Snippets & Examples</h1>
-            <p>Your ultimate resource for programming tools, code snippets, and learning resources for all levels. Created by GhostGamer (@ghstgmr)</p>
-            
-            <div class="hero-btns">
-                <a href="#languages" class="btn btn-primary">Explore Languages</a>
-                <a href="https://discord.gg/ZrBzdsB7yf" target="_blank" class="btn btn-outline">
-                    <i class="fab fa-discord"></i> Join Our Community
-                </a>
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" id="home-view">
+            <div class="container">
+                <h1>Master Programming with Tools, Snippets & Examples</h1>
+                <p>Your ultimate resource for programming tools, code snippets, and learning resources for all levels. Created by GhostGamer (@ghstgmr)</p>
+                
+                <div class="hero-btns">
+                    <a href="#" class="btn btn-primary" id="explore-btn">Explore Languages</a>
+                    <a href="https://discord.gg/ZrBzdsB7yf" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-discord"></i> Join Our Community
+                    </a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Languages Section -->
-    <section class="languages-section" id="languages">
-        <div class="container">
-            <div class="section-header">
-                <h2>Programming Languages</h2>
-                <p>Comprehensive resources for developers at all skill levels</p>
+        <!-- Languages Section -->
+        <section class="languages-section" id="languages-view">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Programming Languages</h2>
+                    <p>Comprehensive resources for developers at all skill levels</p>
+                </div>
+                
+                <div class="languages-grid" id="languages-container">
+                    <!-- Languages will be populated by JavaScript -->
+                </div>
             </div>
-            
-            <div class="languages-grid" id="languages-container">
-                <!-- Languages will be populated by JavaScript -->
+        </section>
+        
+        <!-- Language Detail View -->
+        <section class="language-detail" id="language-detail-view">
+            <div class="container">
+                <div class="back-btn" id="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Languages
+                </div>
+                
+                <div class="detail-header" id="detail-header">
+                    <div class="detail-icon" id="detail-icon">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <div class="detail-info">
+                        <h2 id="detail-title">JavaScript</h2>
+                        <p id="detail-description">The language of the web. Used for frontend, backend, and mobile development.</p>
+                    </div>
+                </div>
+                
+                <div class="language-tabs">
+                    <button class="tab active" data-tab="guides">Guides</button>
+                    <button class="tab" data-tab="snippets">Snippets</button>
+                    <button class="tab" data-tab="resources">Resources</button>
+                </div>
+                
+                <div class="tab-content active" id="guides-content">
+                    <div class="section-header">
+                        <h2>Learning Guides</h2>
+                        <p>Step-by-step tutorials for all skill levels</p>
+                    </div>
+                    <div class="guides-grid" id="guides-container">
+                        <!-- Guides will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="snippets-content">
+                    <div class="section-header">
+                        <h2>Code Snippets</h2>
+                        <p>Ready-to-use code snippets for common programming tasks</p>
+                    </div>
+                    <div class="snippets-grid" id="snippets-container">
+                        <!-- Snippets will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="resources-content">
+                    <div class="section-header">
+                        <h2>Development Resources</h2>
+                        <p>Interactive tools and sample programs</p>
+                    </div>
+                    <div class="resources-grid" id="resources-container">
+                        <!-- Resources will be populated by JavaScript -->
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Resources Section -->
-    <section class="resources-section" id="resources">
-        <div class="container">
-            <div class="section-header">
-                <h2>Development Resources</h2>
-                <p>Interactive tools, code snippets, and sample programs</p>
-            </div>
-            
-            <div class="resources-tabs">
-                <button class="tab-btn active" data-category="all">All Resources</button>
-                <button class="tab-btn" data-category="javascript">JavaScript</button>
-                <button class="tab-btn" data-category="python">Python</button>
-                <button class="tab-btn" data-category="java">Java</button>
-                <button class="tab-btn" data-category="csharp">C#</button>
-                <button class="tab-btn" data-category="php">PHP</button>
-            </div>
-            
-            <div class="resources-grid" id="resources-container">
-                <!-- Resources will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Code Snippets Section -->
-    <section class="resources-section" id="snippets">
-        <div class="container">
-            <div class="section-header">
-                <h2>Code Snippets</h2>
-                <p>Ready-to-use code snippets for common programming tasks</p>
-            </div>
-            
-            <div id="snippets-container">
-                <!-- Snippets will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Guides Section -->
-    <section class="guides-section" id="guides">
-        <div class="container">
-            <div class="section-header">
-                <h2>Learning Guides</h2>
-                <p>Step-by-step tutorials for all skill levels</p>
-            </div>
-            
-            <div class="guides-container" id="guides-container">
-                <!-- Guides will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer id="about">
@@ -766,12 +827,8 @@
                 
                 <div class="footer-col">
                     <h3>Languages</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fab fa-js"></i> JavaScript</a></li>
-                        <li><a href="#"><i class="fab fa-python"></i> Python</a></li>
-                        <li><a href="#"><i class="fab fa-java"></i> Java</a></li>
-                        <li><a href="#"><i class="fas fa-code"></i> C++</a></li>
-                        <li><a href="#"><i class="fab fa-php"></i> PHP</a></li>
+                    <ul class="footer-links" id="footer-languages">
+                        <!-- Languages will be populated by JavaScript -->
                     </ul>
                 </div>
                 
@@ -806,150 +863,47 @@
     </footer>
 
     <script>
-        // Backend Simulation - Data Storage and API
+        // Backend Simulation - Data Storage
         const backendAPI = {
-            // Database simulation
             languages: [
                 {
-                    id: 1,
+                    id: "javascript",
                     name: "JavaScript",
                     icon: "fab fa-js",
                     color: "#f7df1e",
                     description: "The language of the web. Used for frontend, backend, and mobile development.",
-                    snippets: 20,
-                    samples: 15,
-                    guides: 5
-                },
-                {
-                    id: 2,
-                    name: "Python",
-                    icon: "fab fa-python",
-                    color: "#3776ab",
-                    description: "Versatile language for web development, data science, AI, and automation.",
-                    snippets: 22,
-                    samples: 12,
-                    guides: 6
-                },
-                {
-                    id: 3,
-                    name: "Java",
-                    icon: "fab fa-java",
-                    color: "#007396",
-                    description: "Object-oriented language used for enterprise applications and Android development.",
-                    snippets: 18,
-                    samples: 10,
-                    guides: 5
-                },
-                {
-                    id: 4,
-                    name: "C#",
-                    icon: "fas fa-copyright",
-                    color: "#239120",
-                    description: "Modern language for Windows applications, games with Unity, and enterprise software.",
-                    snippets: 15,
-                    samples: 8,
-                    guides: 4
-                },
-                {
-                    id: 5,
-                    name: "PHP",
-                    icon: "fab fa-php",
-                    color: "#777bb4",
-                    description: "Server-side scripting language especially suited to web development.",
-                    snippets: 16,
-                    samples: 9,
-                    guides: 5
-                },
-                {
-                    id: 6,
-                    name: "Ruby",
-                    icon: "fas fa-gem",
-                    color: "#cc342d",
-                    description: "Dynamic, open source language with a focus on simplicity and productivity.",
-                    snippets: 14,
-                    samples: 7,
-                    guides: 4
-                },
-                {
-                    id: 7,
-                    name: "Go",
-                    icon: "fab fa-golang",
-                    color: "#00add8",
-                    description: "Statically typed language developed at Google with a focus on concurrency.",
-                    snippets: 12,
-                    samples: 6,
-                    guides: 3
-                },
-                {
-                    id: 8,
-                    name: "Swift",
-                    icon: "fab fa-swift",
-                    color: "#fa7343",
-                    description: "Powerful and intuitive programming language for iOS, macOS, and more.",
-                    snippets: 10,
-                    samples: 5,
-                    guides: 3
-                }
-            ],
-            
-            resources: [
-                {
-                    id: 1,
-                    title: "JSON Formatter",
-                    icon: "fas fa-arrows-alt-h",
-                    description: "Format and validate your JSON data with syntax highlighting and error detection.",
-                    language: "JavaScript",
-                    url: "#"
-                },
-                {
-                    id: 2,
-                    title: "Password Generator",
-                    icon: "fas fa-lock",
-                    description: "Generate secure passwords with customizable length and character types.",
-                    language: "JavaScript",
-                    url: "#"
-                },
-                {
-                    id: 3,
-                    title: "Base64 Encoder/Decoder",
-                    icon: "fas fa-code",
-                    description: "Convert strings to Base64 and decode Base64 back to original format.",
-                    language: "Python",
-                    url: "#"
-                },
-                {
-                    id: 4,
-                    title: "Color Converter",
-                    icon: "fas fa-palette",
-                    description: "Convert between HEX, RGB, HSL, and other color formats with real-time preview.",
-                    language: "JavaScript",
-                    url: "#"
-                },
-                {
-                    id: 5,
-                    title: "Regex Tester",
-                    icon: "fas fa-terminal",
-                    description: "Test and debug regular expressions with live matching and explanation.",
-                    language: "JavaScript",
-                    url: "#"
-                },
-                {
-                    id: 6,
-                    title: "SQL Formatter",
-                    icon: "fas fa-database",
-                    description: "Format SQL queries with syntax highlighting and indentation.",
-                    language: "Java",
-                    url: "#"
-                }
-            ],
-            
-            snippets: [
-                {
-                    id: 1,
-                    title: "JavaScript: Fetch API with Error Handling",
-                    icon: "fab fa-js",
-                    language: "JavaScript",
-                    code: `async function fetchData(url) {
+                    guides: [
+                        {
+                            id: 1,
+                            title: "JavaScript Fundamentals",
+                            level: "beginner",
+                            description: "Learn the basics of JavaScript: variables, data types, functions, and control structures. Perfect for absolute beginners.",
+                            content: "This guide covers all the essential JavaScript concepts...",
+                            readTime: 45
+                        },
+                        {
+                            id: 2,
+                            title: "Modern JavaScript ES6+",
+                            level: "intermediate",
+                            description: "Master modern JavaScript features like arrow functions, classes, promises, and async/await.",
+                            content: "Explore the powerful features introduced in ECMAScript 6 and beyond...",
+                            readTime: 60
+                        },
+                        {
+                            id: 3,
+                            title: "JavaScript Design Patterns",
+                            level: "advanced",
+                            description: "Learn professional design patterns for building scalable JavaScript applications.",
+                            content: "Discover how to implement common design patterns in JavaScript...",
+                            readTime: 75
+                        }
+                    ],
+                    snippets: [
+                        {
+                            id: 1,
+                            title: "Fetch API with Error Handling",
+                            description: "Robust implementation of fetch with error handling",
+                            code: `async function fetchData(url) {
   try {
     const response = await fetch(url);
     
@@ -963,59 +917,209 @@
     console.error('Fetch error:', error);
     return null;
   }
-}
-
-// Usage:
-const apiData = await fetchData('https://api.example.com/data');
-if (apiData) {
-  console.log('Data received:', apiData);
 }`
+                        },
+                        {
+                            id: 2,
+                            title: "Debounce Function",
+                            description: "Optimize event handlers with debouncing",
+                            code: `function debounce(func, delay) {
+  let timeoutId;
+  return function(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}`
+                        },
+                        {
+                            id: 3,
+                            title: "Form Validation",
+                            description: "Client-side form validation with custom messages",
+                            code: `function validateForm(form) {
+  const errors = [];
+  const email = form.email.value;
+  
+  if (!email.includes('@')) {
+    errors.push('Please enter a valid email address');
+  }
+  
+  if (form.password.value.length < 8) {
+    errors.push('Password must be at least 8 characters');
+  }
+  
+  return errors;
+}`
+                        }
+                    ],
+                    resources: [
+                        {
+                            id: 1,
+                            title: "JSON Formatter",
+                            icon: "fas fa-arrows-alt-h",
+                            description: "Format and validate your JSON data with syntax highlighting and error detection.",
+                            url: "#"
+                        },
+                        {
+                            id: 2,
+                            title: "Regex Tester",
+                            icon: "fas fa-terminal",
+                            description: "Test and debug regular expressions with live matching and explanation.",
+                            url: "#"
+                        },
+                        {
+                            id: 3,
+                            title: "DOM Manipulation Cheat Sheet",
+                            icon: "fas fa-code",
+                            description: "Quick reference for common DOM manipulation techniques.",
+                            url: "#"
+                        }
+                    ]
                 },
                 {
-                    id: 2,
-                    title: "Python: Read CSV File with Pandas",
+                    id: "python",
+                    name: "Python",
                     icon: "fab fa-python",
-                    language: "Python",
-                    code: `import pandas as pd
+                    color: "#3776ab",
+                    description: "Versatile language for web development, data science, AI, and automation.",
+                    guides: [
+                        {
+                            id: 1,
+                            title: "Python Basics",
+                            level: "beginner",
+                            description: "Learn Python syntax, data structures, and control flow.",
+                            content: "This guide introduces the Python programming language...",
+                            readTime: 40
+                        },
+                        {
+                            id: 2,
+                            title: "Data Analysis with Pandas",
+                            level: "intermediate",
+                            description: "Master data manipulation with Pandas library.",
+                            content: "Learn how to use Pandas for data cleaning and analysis...",
+                            readTime: 65
+                        },
+                        {
+                            id: 3,
+                            title: "Flask Web Development",
+                            level: "intermediate",
+                            description: "Build web applications with Flask framework.",
+                            content: "Create REST APIs and web applications using Flask...",
+                            readTime: 70
+                        }
+                    ],
+                    snippets: [
+                        {
+                            id: 1,
+                            title: "Read CSV File",
+                            description: "Read CSV files with error handling",
+                            code: `import csv
 
-def read_csv_file(file_path):
-    """
-    Reads a CSV file and returns a pandas DataFrame.
-    
-    Args:
-        file_path (str): Path to the CSV file
-        
-    Returns:
-        pd.DataFrame: DataFrame containing the CSV data
-    """
+def read_csv(filename):
     try:
-        df = pd.read_csv(file_path)
-        print(f"Successfully read {file_path}")
-        return df
+        with open(filename, 'r') as file:
+            reader = csv.DictReader(file)
+            return [row for row in reader]
     except FileNotFoundError:
-        print(f"Error: File not found at {file_path}")
-        return None
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
-        return None
+        print(f"File {filename} not found")
+        return []`
+                        },
+                        {
+                            id: 2,
+                            title: "List Comprehensions",
+                            description: "Powerful one-line list transformations",
+                            code: `# Square numbers
+numbers = [1, 2, 3, 4, 5]
+squared = [n**2 for n in numbers]
 
-# Usage example:
-data_frame = read_csv_file('data/sample.csv')
-if data_frame is not None:
-    print(data_frame.head())`
+# Filter even numbers
+evens = [n for n in numbers if n % 2 == 0]`
+                        },
+                        {
+                            id: 3,
+                            title: "Context Manager",
+                            description: "Custom context manager implementation",
+                            code: `class CustomContext:
+    def __enter__(self):
+        print("Entering context")
+        return self
+        
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Exiting context")
+        
+with CustomContext() as ctx:
+    print("Inside context")`
+                        }
+                    ],
+                    resources: [
+                        {
+                            id: 1,
+                            title: "Virtual Environment Setup",
+                            icon: "fas fa-box",
+                            description: "Guide to creating isolated Python environments.",
+                            url: "#"
+                        },
+                        {
+                            id: 2,
+                            title: "Python Debugger",
+                            icon: "fas fa-bug",
+                            description: "Interactive debugging tool for Python applications.",
+                            url: "#"
+                        },
+                        {
+                            id: 3,
+                            title: "Data Visualization Guide",
+                            icon: "fas fa-chart-bar",
+                            description: "Create beautiful visualizations with Matplotlib and Seaborn.",
+                            url: "#"
+                        }
+                    ]
                 },
                 {
-                    id: 3,
-                    title: "Java: Read File Line by Line",
+                    id: "java",
+                    name: "Java",
                     icon: "fab fa-java",
-                    language: "Java",
-                    code: `import java.io.BufferedReader;
+                    color: "#007396",
+                    description: "Object-oriented language used for enterprise applications and Android development.",
+                    guides: [
+                        {
+                            id: 1,
+                            title: "Java Fundamentals",
+                            level: "beginner",
+                            description: "Learn Java syntax, OOP principles, and basic concepts.",
+                            content: "Introduction to Java programming language...",
+                            readTime: 50
+                        },
+                        {
+                            id: 2,
+                            title: "Spring Boot REST API",
+                            level: "intermediate",
+                            description: "Build RESTful APIs with Spring Boot framework.",
+                            content: "Create production-ready APIs using Spring Boot...",
+                            readTime: 75
+                        },
+                        {
+                            id: 3,
+                            title: "Java Concurrency",
+                            level: "advanced",
+                            description: "Deep dive into Java's concurrency model.",
+                            content: "Master multithreading and concurrent programming...",
+                            readTime: 90
+                        }
+                    ],
+                    snippets: [
+                        {
+                            id: 1,
+                            title: "File Reading",
+                            description: "Read file line by line with exception handling",
+                            code: `import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class ReadFile {
     public static void main(String[] args) {
-        String filePath = "path/to/your/file.txt";
+        String filePath = "path/to/file.txt";
         
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -1023,95 +1127,75 @@ public class ReadFile {
                 System.out.println(line);
             }
         } catch (IOException e) {
-            System.err.println("An error occurred while reading the file: " + e.getMessage());
+            System.err.println("Error reading file: " + e.getMessage());
         }
     }
 }`
-                },
-                {
-                    id: 4,
-                    title: "Python: Flask REST API",
-                    icon: "fab fa-python",
-                    language: "Python",
-                    code: `from flask import Flask, jsonify, request
-
-app = Flask(__name__)
-
-tasks = [
-    {'id': 1, 'title': 'Task 1', 'done': False},
-    {'id': 2, 'title': 'Task 2', 'done': True}
-]
-
-@app.route('/tasks', methods=['GET'])
-def get_tasks():
-    return jsonify({'tasks': tasks})
-
-@app.route('/tasks', methods=['POST'])
-def create_task():
-    if not request.json or not 'title' in request.json:
-        return jsonify({'error': 'Title is required'}), 400
-        
-    task = {
-        'id': tasks[-1]['id'] + 1,
-        'title': request.json['title'],
-        'done': False
-    }
-    tasks.append(task)
-    return jsonify({'task': task}), 201
-
-if __name__ == '__main__':
-    app.run(debug=True)`
+                        },
+                        {
+                            id: 2,
+                            title: "Singleton Pattern",
+                            description: "Thread-safe singleton implementation",
+                            code: `public class Singleton {
+    private static volatile Singleton instance;
+    
+    private Singleton() {}
+    
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
                 }
-            ],
-            
-            guides: [
-                {
-                    id: 1,
-                    title: "JavaScript Fundamentals",
-                    level: "beginner",
-                    language: "JavaScript",
-                    description: "Learn the basics of JavaScript: variables, data types, functions, and control structures. Perfect for absolute beginners.",
-                    readTime: 45
-                },
-                {
-                    id: 2,
-                    title: "Python Data Analysis",
-                    level: "intermediate",
-                    language: "Python",
-                    description: "Master data manipulation with Pandas, visualization with Matplotlib, and basic statistical analysis.",
-                    readTime: 60
-                },
-                {
-                    id: 3,
-                    title: "Java Concurrency",
-                    level: "advanced",
-                    language: "Java",
-                    description: "Deep dive into Java's concurrency model: threads, executors, locks, and concurrent collections.",
-                    readTime: 90
-                },
-                {
-                    id: 4,
-                    title: "HTML & CSS Basics",
-                    level: "beginner",
-                    language: "Web",
-                    description: "Build your first website with HTML structure and CSS styling. Learn the fundamentals of web development.",
-                    readTime: 30
-                },
-                {
-                    id: 5,
-                    title: "React Hooks Guide",
-                    level: "intermediate",
-                    language: "JavaScript",
-                    description: "Master React hooks including useState, useEffect, useContext, and custom hooks with practical examples.",
-                    readTime: 55
-                },
-                {
-                    id: 6,
-                    title: "Docker for Developers",
-                    level: "intermediate",
-                    language: "DevOps",
-                    description: "Containerize your applications with Docker. Learn Dockerfiles, Docker Compose, and deployment strategies.",
-                    readTime: 70
+            }
+        }
+        return instance;
+    }
+}`
+                        },
+                        {
+                            id: 3,
+                            title: "Lambda Expressions",
+                            description: "Functional programming with lambdas",
+                            code: `import java.util.List;
+import java.util.Arrays;
+
+public class LambdaExample {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+        
+        // Using lambda to print each name
+        names.forEach(name -> System.out.println(name));
+        
+        // Using method reference
+        names.forEach(System.out::println);
+    }
+}`
+                        }
+                    ],
+                    resources: [
+                        {
+                            id: 1,
+                            title: "Java Collections Cheat Sheet",
+                            icon: "fas fa-layer-group",
+                            description: "Quick reference for Java collection classes.",
+                            url: "#"
+                        },
+                        {
+                            id: 2,
+                            title: "JUnit Testing Guide",
+                            icon: "fas fa-vial",
+                            description: "Unit testing in Java with JUnit framework.",
+                            url: "#"
+                        },
+                        {
+                            id: 3,
+                            title: "Spring Boot Reference",
+                            icon: "fas fa-leaf",
+                            description: "Official Spring Boot documentation and examples.",
+                            url: "#"
+                        }
+                    ]
                 }
             ],
             
@@ -1120,28 +1204,113 @@ if __name__ == '__main__':
                 return this.languages;
             },
             
-            getResources: function(category = "all") {
-                if (category === "all") return this.resources;
-                return this.resources.filter(res => res.language.toLowerCase() === category);
-            },
-            
-            getSnippets: function() {
-                return this.snippets;
-            },
-            
-            getGuides: function() {
-                return this.guides;
+            getLanguageById: function(id) {
+                return this.languages.find(lang => lang.id === id);
             }
         };
 
         // Frontend Application
         const app = {
+            currentLanguage: null,
+            currentView: 'home',
+            
             init: function() {
-                this.renderLanguages();
-                this.renderResources();
-                this.renderSnippets();
-                this.renderGuides();
                 this.setupEventListeners();
+                this.renderLanguages();
+                this.renderFooterLanguages();
+                this.showView('home');
+            },
+            
+            setupEventListeners: function() {
+                // Navigation
+                document.getElementById('home-link').addEventListener('click', () => this.showView('home'));
+                document.getElementById('home-nav').addEventListener('click', () => this.showView('home'));
+                document.getElementById('languages-nav').addEventListener('click', () => this.showView('languages'));
+                document.getElementById('resources-nav').addEventListener('click', () => this.showView('resources'));
+                document.getElementById('guides-nav').addEventListener('click', () => this.showView('guides'));
+                document.getElementById('about-nav').addEventListener('click', () => this.scrollToFooter());
+                document.getElementById('explore-btn').addEventListener('click', () => this.showView('languages'));
+                
+                // Language detail
+                document.getElementById('back-btn').addEventListener('click', () => this.showView('languages'));
+                
+                // Theme toggle
+                document.getElementById('theme-toggle').addEventListener('click', () => this.toggleTheme());
+                
+                // Tab switching
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const tabName = tab.dataset.tab;
+                        this.switchTab(tabName);
+                    });
+                });
+            },
+            
+            showView: function(viewName) {
+                this.currentView = viewName;
+                
+                // Hide all views
+                document.getElementById('home-view').style.display = 'none';
+                document.getElementById('languages-view').style.display = 'none';
+                document.getElementById('language-detail-view').style.display = 'none';
+                
+                // Show the selected view
+                if (viewName === 'home') {
+                    document.getElementById('home-view').style.display = 'block';
+                } else if (viewName === 'languages') {
+                    document.getElementById('languages-view').style.display = 'block';
+                } else if (viewName === 'language') {
+                    document.getElementById('language-detail-view').style.display = 'block';
+                }
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            },
+            
+            showLanguageDetail: function(languageId) {
+                this.currentLanguage = backendAPI.getLanguageById(languageId);
+                if (!this.currentLanguage) return;
+                
+                // Update header
+                document.getElementById('detail-icon').innerHTML = `<i class="${this.currentLanguage.icon}"></i>`;
+                document.getElementById('detail-icon').style.backgroundColor = `${this.currentLanguage.color}20`;
+                document.getElementById('detail-title').textContent = this.currentLanguage.name;
+                document.getElementById('detail-description').textContent = this.currentLanguage.description;
+                
+                // Render content
+                this.renderGuides();
+                this.renderSnippets();
+                this.renderResources();
+                
+                // Reset to guides tab
+                this.switchTab('guides');
+                
+                // Show the view
+                this.showView('language');
+            },
+            
+            switchTab: function(tabName) {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                // Hide all content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Activate selected tab
+                const activeTab = document.querySelector(`.tab[data-tab="${tabName}"]`);
+                if (activeTab) {
+                    activeTab.classList.add('active');
+                }
+                
+                // Show selected content
+                const activeContent = document.getElementById(`${tabName}-content`);
+                if (activeContent) {
+                    activeContent.classList.add('active');
+                }
             },
             
             renderLanguages: function() {
@@ -1151,24 +1320,24 @@ if __name__ == '__main__':
                 let html = '';
                 languages.forEach(lang => {
                     html += `
-                    <div class="language-card ${lang.name.toLowerCase()}">
-                        <div class="language-icon" style="color: ${lang.color}">
+                    <div class="language-card ${lang.name.toLowerCase()}" data-id="${lang.id}">
+                        <div class="language-icon" style="background-color: ${lang.color}20">
                             <i class="${lang.icon}"></i>
                         </div>
                         <h3>${lang.name}</h3>
                         <p>${lang.description}</p>
                         <div class="language-stats">
                             <div class="stat">
-                                <div class="stat-value">${lang.snippets}+</div>
+                                <div class="stat-value">${lang.guides.length}</div>
+                                <div class="stat-label">Guides</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">${lang.snippets.length}</div>
                                 <div class="stat-label">Snippets</div>
                             </div>
                             <div class="stat">
-                                <div class="stat-value">${lang.samples}</div>
-                                <div class="stat-label">Samples</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${lang.guides}</div>
-                                <div class="stat-label">Guides</div>
+                                <div class="stat-value">${lang.resources.length}</div>
+                                <div class="stat-label">Resources</div>
                             </div>
                         </div>
                     </div>
@@ -1176,26 +1345,47 @@ if __name__ == '__main__':
                 });
                 
                 container.innerHTML = html;
+                
+                // Add event listeners
+                document.querySelectorAll('.language-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const languageId = card.dataset.id;
+                        this.showLanguageDetail(languageId);
+                    });
+                });
             },
             
-            renderResources: function(category = "all") {
-                const container = document.getElementById('resources-container');
-                const resources = backendAPI.getResources(category);
+            renderFooterLanguages: function() {
+                const container = document.getElementById('footer-languages');
+                const languages = backendAPI.getLanguages();
                 
                 let html = '';
-                resources.forEach(res => {
+                languages.forEach(lang => {
                     html += `
-                    <div class="resource-card">
-                        <div class="resource-header">
-                            <i class="${res.icon}"></i>
-                            <h3>${res.title}</h3>
+                    <li><a href="#"><i class="${lang.icon}"></i> ${lang.name}</a></li>
+                    `;
+                });
+                
+                container.innerHTML = html;
+            },
+            
+            renderGuides: function() {
+                const container = document.getElementById('guides-container');
+                if (!this.currentLanguage) return;
+                
+                let html = '';
+                this.currentLanguage.guides.forEach(guide => {
+                    html += `
+                    <div class="guide-card ${guide.level}">
+                        <div class="guide-level">${guide.level.charAt(0).toUpperCase() + guide.level.slice(1)} Level</div>
+                        <div class="guide-content">
+                            <h3>${guide.title}</h3>
+                            <p>${guide.description}</p>
+                            <a href="#" class="btn btn-primary">Read Guide</a>
                         </div>
-                        <div class="resource-body">
-                            <p>${res.description}</p>
-                        </div>
-                        <div class="resource-footer">
-                            <div class="language-tag">${res.language}</div>
-                            <a href="${res.url}" class="btn btn-primary">Use Tool</a>
+                        <div class="guide-meta">
+                            <span>${this.currentLanguage.name}</span>
+                            <span>${guide.readTime} min read</span>
                         </div>
                     </div>
                     `;
@@ -1206,110 +1396,110 @@ if __name__ == '__main__':
             
             renderSnippets: function() {
                 const container = document.getElementById('snippets-container');
-                const snippets = backendAPI.getSnippets();
+                if (!this.currentLanguage) return;
                 
                 let html = '';
-                snippets.forEach(snip => {
+                this.currentLanguage.snippets.forEach(snippet => {
                     html += `
-                    <div class="code-container">
-                        <div class="code-header">
-                            <div class="code-title">
-                                <i class="${snip.icon}"></i>
-                                <span>${snip.title}</span>
-                            </div>
-                            <div class="code-actions">
-                                <button class="code-btn" data-code="${encodeURIComponent(snip.code)}"><i class="far fa-copy"></i></button>
-                                <button class="code-btn"><i class="far fa-star"></i></button>
-                            </div>
+                    <div class="snippet-card">
+                        <div class="snippet-header">
+                            <i class="${this.currentLanguage.icon}"></i>
+                            <h3>${snippet.title}</h3>
                         </div>
-                        <div class="code-content">
-                            <pre><code>${snip.code}</code></pre>
+                        <div class="snippet-content">
+                            <pre><code>${snippet.code}</code></pre>
+                        </div>
+                        <div class="snippet-footer">
+                            <button class="btn btn-outline copy-btn" data-code="${encodeURIComponent(snippet.code)}">
+                                <i class="far fa-copy"></i> Copy Code
+                            </button>
                         </div>
                     </div>
                     `;
                 });
                 
                 container.innerHTML = html;
-            },
-            
-            renderGuides: function() {
-                const container = document.getElementById('guides-container');
-                const guides = backendAPI.getGuides();
                 
-                let html = '';
-                guides.forEach(guide => {
-                    html += `
-                    <div class="guide-card ${guide.level}">
-                        <div class="guide-level">${guide.level.charAt(0).toUpperCase() + guide.level.slice(1)} Level</div>
-                        <div class="guide-content">
-                            <h3>${guide.title}</h3>
-                            <p>${guide.description}</p>
-                            <a href="#" class="btn btn-primary">Read Guide</a>
-                        </div>
-                        <div class="guide-meta">
-                            <span>${guide.language}</span>
-                            <span>${guide.readTime} min read</span>
-                        </div>
-                    </div>
-                    `;
-                });
-                
-                container.innerHTML = html;
-            },
-            
-            setupEventListeners: function() {
-                // Tab switching
-                const tabBtns = document.querySelectorAll('.tab-btn');
-                tabBtns.forEach(btn => {
+                // Add copy functionality
+                document.querySelectorAll('.copy-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
-                        // Remove active class from all buttons
-                        tabBtns.forEach(b => b.classList.remove('active'));
-                        // Add active class to clicked button
-                        btn.classList.add('active');
-                        // Filter resources
-                        this.renderResources(btn.dataset.category);
-                    });
-                });
-                
-                // Smooth scrolling for anchor links
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function(e) {
-                        if(this.getAttribute('href') === '#') return;
-                        
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if(target) {
-                            window.scrollTo({
-                                top: target.offsetTop - 80,
-                                behavior: 'smooth'
-                            });
-                        }
-                    });
-                });
-                
-                // Copy button functionality
-                document.addEventListener('click', function(e) {
-                    if(e.target.closest('.code-btn .fa-copy') || e.target.closest('.code-btn')?.classList.contains('fa-copy')) {
-                        const btn = e.target.closest('.code-btn');
                         const code = decodeURIComponent(btn.dataset.code);
+                        navigator.clipboard.writeText(code);
                         
-                        navigator.clipboard.writeText(code).then(() => {
-                            const icon = btn.querySelector('i') || btn;
-                            const original = icon.className;
-                            icon.className = 'fas fa-check';
-                            
-                            setTimeout(() => {
-                                icon.className = original;
-                            }, 2000);
-                        });
-                    }
+                        // Show feedback
+                        const originalText = btn.innerHTML;
+                        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                        }, 2000);
+                    });
                 });
+            },
+            
+            renderResources: function() {
+                const container = document.getElementById('resources-container');
+                if (!this.currentLanguage) return;
+                
+                let html = '';
+                this.currentLanguage.resources.forEach(res => {
+                    html += `
+                    <div class="resource-card">
+                        <div class="resource-header">
+                            <i class="${res.icon}"></i>
+                            <h3>${res.title}</h3>
+                        </div>
+                        <div class="resource-body">
+                            <p>${res.description}</p>
+                        </div>
+                        <div class="resource-footer">
+                            <div class="language-tag">${this.currentLanguage.name}</div>
+                            <a href="${res.url}" class="btn btn-primary">View Resource</a>
+                        </div>
+                    </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+            },
+            
+            toggleTheme: function() {
+                const body = document.body;
+                const themeBtn = document.getElementById('theme-toggle');
+                
+                if (body.classList.contains('light-theme')) {
+                    body.classList.remove('light-theme');
+                    themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                } else {
+                    body.classList.add('light-theme');
+                    themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+                
+                // Save theme preference
+                localStorage.setItem('theme', body.classList.contains('light-theme') ? 'light' : 'dark');
+            },
+            
+            scrollToFooter: function() {
+                document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+            },
+            
+            loadThemePreference: function() {
+                const savedTheme = localStorage.getItem('theme');
+                const themeBtn = document.getElementById('theme-toggle');
+                
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    document.body.classList.remove('light-theme');
+                    themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                }
             }
         };
 
-        // Initialize the app when the DOM is loaded
+        // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
             app.init();
+            app.loadThemePreference();
         });
     </script>
 </body>
