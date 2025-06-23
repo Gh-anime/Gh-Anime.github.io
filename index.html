@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Credential Filter</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-filter"></i> URL Credential Filter</h1>
+            <p>Search through URLs with username:password patterns</p>
+        </header>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search by domain, username or password...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="filter-options">
+                <label>
+                    <input type="checkbox" id="showPasswords" checked>
+                    Show Passwords
+                </label>
+            </div>
+        </div>
+        
+        <div class="results-container">
+            <div class="results-header">
+                <span class="count">0</span> results found
+                <button id="copyBtn" class="copy-btn"><i class="fas fa-copy"></i> Copy All</button>
+            </div>
+            <div id="results" class="results-list"></div>
+        </div>
+        
+        <footer>
+            <p>Upload your text file with URLs to filter through the data</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
