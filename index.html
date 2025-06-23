@@ -34,7 +34,6 @@
             --secondary-text: rgba(255, 255, 255, 0.7);
             --border-color: rgba(255, 255, 255, 0.1);
             --footer-bg: rgba(10, 10, 20, 0.9);
-            --modal-bg: rgba(30, 30, 46, 0.95);
         }
         
         .light-theme {
@@ -46,7 +45,6 @@
             --secondary-text: #4a5568;
             --border-color: rgba(0, 0, 0, 0.1);
             --footer-bg: #f8f9fa;
-            --modal-bg: rgba(255, 255, 255, 0.95);
         }
 
         * {
@@ -457,7 +455,6 @@
             overflow: hidden;
             border: 1px solid var(--border-color);
             transition: var(--transition);
-            cursor: pointer;
         }
         
         .guide-card:hover {
@@ -574,7 +571,7 @@
             border: 1px solid var(--border-color);
             transition: var(--transition);
         }
-
+        
         .resource-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow);
@@ -629,70 +626,73 @@
         /* About Section */
         .about-section {
             padding: 80px 0;
-            max-width: 800px;
-            margin: 0 auto;
+            display: none;
         }
         
         .about-content {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
         }
         
-        .about-content h2 {
-            font-size: 2rem;
+        .about-text h2 {
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            color: var(--accent);
         }
         
-        .about-content p {
+        .about-text p {
+            color: var(--secondary-text);
             margin-bottom: 20px;
             line-height: 1.8;
-            color: var(--secondary-text);
         }
         
-        .team-grid {
+        .about-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
         }
         
-        .team-member {
-            text-align: center;
+        .stat-box {
             background: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 30px;
+            padding: 20px;
+            text-align: center;
             border: 1px solid var(--border-color);
         }
         
-        .team-member img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 3px solid var(--accent);
-        }
-        
-        .team-member h3 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-        
-        .team-member .role {
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
             color: var(--accent);
-            margin-bottom: 15px;
-            font-weight: 600;
+            margin-bottom: 10px;
         }
         
-        .team-member p {
+        .stat-label {
+            font-size: 1rem;
             color: var(--secondary-text);
-            font-size: 0.95rem;
         }
         
-        /* Modal */
+        .about-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .about-image-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        /* Guide Modal */
         .modal {
             display: none;
             position: fixed;
@@ -700,78 +700,68 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
             overflow-y: auto;
-            padding: 20px;
             backdrop-filter: blur(5px);
         }
         
         .modal-content {
-            background: var(--modal-bg);
-            border-radius: var(--border-radius);
+            background: var(--card-bg);
             max-width: 800px;
             margin: 50px auto;
-            padding: 40px;
-            position: relative;
-            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            overflow: hidden;
             border: 1px solid var(--border-color);
         }
         
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: var(--text-color);
-            cursor: pointer;
+        .modal-header {
+            padding: 20px;
+            background: rgba(67, 97, 238, 0.2);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            font-size: 1.8rem;
+        }
+        
+        .close-btn {
             background: transparent;
             border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
             width: 40px;
             height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
             transition: var(--transition);
         }
         
-        .close-modal:hover {
-            background: var(--primary);
+        .close-btn:hover {
+            background: var(--danger);
             color: white;
         }
         
-        .modal-header {
-            margin-bottom: 30px;
-        }
-        
-        .modal-header h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: var(--accent);
-        }
-        
-        .guide-level-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
         .modal-body {
+            padding: 30px;
+            color: var(--secondary-text);
             line-height: 1.8;
         }
         
-        .modal-body h3 {
+        .modal-body h4 {
+            color: var(--text-color);
             margin: 25px 0 15px;
-            color: var(--accent);
+            font-size: 1.4rem;
         }
         
         .modal-body p {
             margin-bottom: 15px;
-            color: var(--secondary-text);
         }
         
         .modal-body pre {
@@ -781,7 +771,6 @@
             overflow-x: auto;
             margin: 20px 0;
             font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
         }
         
         /* Footer */
@@ -874,6 +863,16 @@
         }
 
         /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+        }
+        
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -897,7 +896,7 @@
                 align-items: center;
             }
             
-            .languages-section, .language-detail, .about-section {
+            .languages-section, .about-section, .language-detail {
                 padding: 60px 0;
             }
             
@@ -910,8 +909,8 @@
                 text-align: center;
             }
             
-            .modal-content {
-                padding: 20px;
+            .about-stats {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -1032,82 +1031,72 @@
             </div>
         </section>
         
-        <!-- Resources View -->
-        <section class="languages-section" id="resources-view" style="display: none;">
+        <!-- About Section -->
+        <section class="about-section" id="about-view">
             <div class="container">
                 <div class="section-header">
-                    <h2>Development Resources</h2>
-                    <p>Interactive tools and utilities for all programming languages</p>
-                </div>
-                
-                <div class="resources-grid" id="all-resources-container">
-                    <!-- All resources will be populated by JavaScript -->
-                </div>
-            </div>
-        </section>
-        
-        <!-- Guides View -->
-        <section class="languages-section" id="guides-view" style="display: none;">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Learning Guides</h2>
-                    <p>Step-by-step tutorials for all skill levels</p>
-                </div>
-                
-                <div class="guides-grid" id="all-guides-container">
-                    <!-- All guides will be populated by JavaScript -->
-                </div>
-            </div>
-        </section>
-        
-        <!-- About View -->
-        <section class="about-section" id="about-view" style="display: none;">
-            <div class="container">
-                <div class="about-content">
                     <h2>About CodeMaster Hub</h2>
-                    <p>CodeMaster Hub is a comprehensive programming resource created by GhostGamer (@ghstgmr) to help developers of all skill levels master programming languages and technologies.</p>
-                    
-                    <p>Our mission is to provide high-quality, practical resources including code snippets, learning guides, development tools, and sample projects to accelerate your learning journey.</p>
-                    
-                    <p>Whether you're a beginner learning your first programming language or an experienced developer looking to expand your skillset, CodeMaster Hub has resources tailored to your needs.</p>
-                    
-                    <h3>Our Team</h3>
-                    
-                    <div class="team-grid">
-                        <div class="team-member">
-                            <img src="https://avatars.githubusercontent.com/u/12345678?v=4" alt="GhostGamer">
-                            <h3>GhostGamer</h3>
-                            <div class="role">Founder & Lead Developer</div>
-                            <p>Passionate about creating educational programming resources and building developer communities.</p>
+                    <p>Learn about our mission and the team behind this platform</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Empowering Developers Worldwide</h2>
+                        <p>CodeMaster Hub was founded in 2023 with a simple mission: to create the ultimate learning platform for developers of all skill levels. We believe that everyone should have access to high-quality programming resources, regardless of their background or experience level.</p>
+                        
+                        <p>Our platform brings together tools, code snippets, and learning materials for the most popular programming languages. Whether you're just starting your coding journey or you're an experienced developer looking to master new technologies, CodeMaster Hub has something for you.</p>
+                        
+                        <div class="about-stats">
+                            <div class="stat-box">
+                                <div class="stat-value">8</div>
+                                <div class="stat-label">Languages</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">120+</div>
+                                <div class="stat-label">Guides</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">350+</div>
+                                <div class="stat-label">Snippets</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">50+</div>
+                                <div class="stat-label">Tools</div>
+                            </div>
                         </div>
                         
-                        <div class="team-member">
-                            <img src="https://avatars.githubusercontent.com/u/23456789?v=4" alt="CodeWizard">
-                            <h3>CodeWizard</h3>
-                            <div class="role">Content Creator</div>
-                            <p>Expert in multiple programming languages with a talent for explaining complex concepts simply.</p>
-                        </div>
+                        <h2>Join Our Community</h2>
+                        <p>CodeMaster Hub is more than just a resource library - it's a thriving community of passionate developers. Join our Discord server to connect with other developers, ask questions, share your projects, and grow together.</p>
                         
-                        <div class="team-member">
-                            <img src="https://avatars.githubusercontent.com/u/34567890?v=4" alt="DevNinja">
-                            <h3>DevNinja</h3>
-                            <div class="role">Community Manager</div>
-                            <p>Connects with developers worldwide to build an inclusive and supportive programming community.</p>
-                        </div>
+                        <a href="https://discord.gg/ZrBzdsB7yf" target="_blank" class="btn btn-discord" style="margin-top: 20px">
+                            <i class="fab fa-discord"></i> Join Discord Community
+                        </a>
                     </div>
                     
-                    <h3>Join Our Community</h3>
-                    <p>Connect with thousands of developers in our Discord community. Share knowledge, ask questions, and collaborate on projects.</p>
-                    
-                    <div class="hero-btns">
-                        <a href="https://discord.gg/ZrBzdsB7yf" target="_blank" class="btn btn-discord">
-                            <i class="fab fa-discord"></i> Join Discord Server
-                        </a>
+                    <div class="about-image">
+                        <div class="about-image-placeholder">
+                            CodeMaster Hub Team
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+    
+    <!-- Guide Modal -->
+    <div class="modal" id="guide-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Guide Title</h3>
+                <button class="close-btn" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Guide content will be populated here -->
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer id="footer">
@@ -1120,13 +1109,13 @@
                         <a href="https://discord.gg/ZrBzdsB7yf" target="_blank" class="social-link">
                             <i class="fab fa-discord"></i>
                         </a>
-                        <a href="https://github.com/ghstgmr" target="_blank" class="social-link">
+                        <a href="#" class="social-link">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://twitter.com/ghstgmr" target="_blank" class="social-link">
+                        <a href="#" class="social-link">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="https://youtube.com/c/CodeMasterHub" target="_blank" class="social-link">
+                        <a href="#" class="social-link">
                             <i class="fab fa-youtube"></i>
                         </a>
                     </div>
@@ -1142,11 +1131,11 @@
                 <div class="footer-col">
                     <h3>Resources</h3>
                     <ul class="footer-links">
-                        <li><a href="#" id="footer-resources"><i class="fas fa-chevron-right"></i> All Resources</a></li>
-                        <li><a href="#" id="footer-snippets"><i class="fas fa-chevron-right"></i> Code Snippets</a></li>
-                        <li><a href="#" id="footer-guides"><i class="fas fa-chevron-right"></i> Learning Guides</a></li>
-                        <li><a href="#" id="footer-tools"><i class="fas fa-chevron-right"></i> Development Tools</a></li>
-                        <li><a href="#" id="footer-cheatsheets"><i class="fas fa-chevron-right"></i> Cheat Sheets</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Tools</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Snippets</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Sample Programs</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Cheat Sheets</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation</a></li>
                     </ul>
                 </div>
                 
@@ -1154,10 +1143,10 @@
                     <h3>Community</h3>
                     <ul class="footer-links">
                         <li><a href="https://discord.gg/ZrBzdsB7yf" target="_blank"><i class="fab fa-discord"></i> Discord Server</a></li>
-                        <li><a href="https://github.com/ghstgmr/codemaster-hub" target="_blank"><i class="fab fa-github"></i> GitHub Repository</a></li>
+                        <li><a href="#"><i class="fab fa-github"></i> GitHub Repository</a></li>
                         <li><a href="#"><i class="fas fa-comments"></i> Forums</a></li>
-                        <li><a href="#" id="footer-contribute"><i class="fas fa-hands-helping"></i> Contribute</a></li>
-                        <li><a href="#" id="footer-report"><i class="fas fa-bug"></i> Report Issues</a></li>
+                        <li><a href="#"><i class="fas fa-hands-helping"></i> Contribute</a></li>
+                        <li><a href="#"><i class="fas fa-bug"></i> Report Issues</a></li>
                     </ul>
                 </div>
             </div>
@@ -1168,24 +1157,6 @@
             </div>
         </div>
     </footer>
-    
-    <!-- Guide Modal -->
-    <div class="modal" id="guide-modal">
-        <div class="modal-content">
-            <button class="close-modal" id="close-modal">&times;</button>
-            <div class="modal-header">
-                <div class="guide-level-badge" id="modal-level">Beginner Level</div>
-                <h2 id="modal-title">JavaScript Fundamentals</h2>
-                <div class="guide-meta">
-                    <span id="modal-language">JavaScript</span>
-                    <span id="modal-time">45 min read</span>
-                </div>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Guide content will be populated here -->
-            </div>
-        </div>
-    </div>
 
     <script>
         // Backend Simulation - Data Storage
@@ -1199,31 +1170,31 @@
                     description: "The language of the web. Used for frontend, backend, and mobile development.",
                     guides: [
                         {
-                            id: "js-fundamentals",
+                            id: 1,
                             title: "JavaScript Fundamentals",
                             level: "beginner",
                             description: "Learn the basics of JavaScript: variables, data types, functions, and control structures. Perfect for absolute beginners.",
-                            content: `
-                                <h3>Introduction to JavaScript</h3>
-                                <p>JavaScript is a versatile programming language that powers the interactive elements of websites. It runs directly in the browser and has expanded to server-side development with Node.js.</p>
-                                
-                                <h3>Variables and Data Types</h3>
-                                <p>JavaScript has three ways to declare variables: var, let, and const. Each has different scoping rules:</p>
-                                <pre>// Variable declaration
-let message = "Hello, World!";
-const PI = 3.14159;
-var count = 10;</pre>
-                                
-                                <p>JavaScript has dynamic typing, meaning variables can hold values of any type:</p>
-                                <pre>let dynamicValue = 42;      // Number
-dynamicValue = "Forty Two";  // String
-dynamicValue = true;         // Boolean</pre>
-                                
-                                <h3>Functions</h3>
-                                <p>Functions are reusable blocks of code that perform specific tasks:</p>
-                                <pre>// Function declaration
+                            content: `<h4>Introduction to JavaScript</h4>
+                            <p>JavaScript is a versatile programming language that powers the interactive elements of websites. It runs in the browser and can also be used on the server with Node.js.</p>
+                            
+                            <h4>Variables and Data Types</h4>
+                            <p>JavaScript has three ways to declare variables:</p>
+                            <pre>var name = "John"; // Old way, avoid in modern code
+let age = 30;       // Mutable variable
+const PI = 3.14;    // Immutable constant</pre>
+                            
+                            <p>JavaScript has dynamic typing, meaning variables can hold values of any type:</p>
+                            <pre>let message = "Hello"; // String
+let count = 5;        // Number
+let isActive = true;  // Boolean
+let person = null;    // Null
+let data;             // Undefined</pre>
+                            
+                            <h4>Functions</h4>
+                            <p>Functions are reusable blocks of code:</p>
+                            <pre>// Function declaration
 function greet(name) {
-    return \`Hello, \${name}!\`;
+    return "Hello, " + name + "!";
 }
 
 // Function expression
@@ -1232,15 +1203,15 @@ const square = function(x) {
 };
 
 // Arrow function (ES6+)
-const multiply = (a, b) => a * b;</pre>
-                                
-                                <h3>Control Structures</h3>
-                                <p>JavaScript provides standard control structures for program flow:</p>
-                                <pre>// If-else statement
+const add = (a, b) => a + b;</pre>
+                            
+                            <h4>Control Structures</h4>
+                            <p>Conditionals and loops control program flow:</p>
+                            <pre>// If statement
 if (age >= 18) {
-    console.log("You are an adult");
+    console.log("Adult");
 } else {
-    console.log("You are a minor");
+    console.log("Minor");
 }
 
 // For loop
@@ -1253,163 +1224,145 @@ let i = 0;
 while (i < 5) {
     console.log(i);
     i++;
-}</pre>
-                            `,
+}</pre>`,
                             readTime: 45
                         },
                         {
-                            id: "js-dom",
-                            title: "DOM Manipulation",
+                            id: 2,
+                            title: "Modern JavaScript ES6+",
                             level: "intermediate",
-                            description: "Master the Document Object Model to create dynamic, interactive web pages.",
-                            content: `
-                                <h3>What is the DOM?</h3>
-                                <p>The Document Object Model (DOM) is a programming interface for HTML and XML documents. It represents the structure of a document as a tree of objects, allowing programs to manipulate the document's content, structure, and style.</p>
-                                
-                                <h3>Selecting Elements</h3>
-                                <p>JavaScript provides several methods to select DOM elements:</p>
-                                <pre>// Select by ID
-const header = document.getElementById('header');
+                            description: "Master modern JavaScript features like arrow functions, classes, promises, and async/await.",
+                            content: `<h4>Arrow Functions</h4>
+                            <p>Arrow functions provide a concise syntax and lexical 'this' binding:</p>
+                            <pre>// Traditional function
+const multiply = function(a, b) {
+    return a * b;
+};
 
-// Select by class name
-const items = document.getElementsByClassName('item');
-
-// Select by tag name
-const paragraphs = document.getElementsByTagName('p');
-
-// Modern selectors (querySelector)
-const main = document.querySelector('main');
-const buttons = document.querySelectorAll('button');</pre>
-                                
-                                <h3>Modifying Elements</h3>
-                                <p>Once you have a reference to an element, you can modify its properties:</p>
-                                <pre>// Change text content
-element.textContent = 'New text';
-
-// Change HTML content
-element.innerHTML = '<strong>Bold</strong> text';
-
-// Change attributes
-element.setAttribute('src', 'new-image.jpg');
-
-// Change styles
-element.style.color = 'blue';
-element.style.fontSize = '20px';
-
-// Add/remove classes
-element.classList.add('active');
-element.classList.remove('inactive');
-element.classList.toggle('hidden');</pre>
-                                
-                                <h3>Event Handling</h3>
-                                <p>JavaScript allows you to respond to user interactions through event listeners:</p>
-                                <pre>// Add click event listener
-button.addEventListener('click', function() {
-    console.log('Button clicked!');
-});
-
-// Event object
-element.addEventListener('click', function(event) {
-    console.log(\`Clicked at (\${event.clientX}, \${event.clientY})\`);
-});
-
-// Event delegation
-document.addEventListener('click', function(event) {
-    if (event.target.matches('button.action')) {
-        handleAction(event.target.dataset.action);
+// Arrow function equivalent
+const multiply = (a, b) => a * b;</pre>
+                            
+                            <h4>Classes</h4>
+                            <p>ES6 introduced class syntax for object-oriented programming:</p>
+                            <pre>class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
     }
-});</pre>
-                            `,
+    
+    greet() {
+        console.log(\`Hello, my name is \${this.name}\`);
+    }
+    
+    static compareAges(a, b) {
+        return a.age - b.age;
+    }
+}
+
+const john = new Person("John", 30);
+john.greet(); // Hello, my name is John</pre>
+                            
+                            <h4>Promises and Async/Await</h4>
+                            <p>Handle asynchronous operations more elegantly:</p>
+                            <pre>// Using promises
+fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+
+// Using async/await
+async function fetchData() {
+    try {
+        const response = await fetch('https://api.example.com/data');
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+}</pre>`,
                             readTime: 60
                         },
                         {
-                            id: "js-async",
-                            title: "Asynchronous JavaScript",
+                            id: 3,
+                            title: "JavaScript Design Patterns",
                             level: "advanced",
-                            description: "Master callbacks, promises, and async/await for efficient asynchronous programming.",
-                            content: `
-                                <h3>The JavaScript Event Loop</h3>
-                                <p>JavaScript is single-threaded but uses an event loop to handle asynchronous operations. Understanding this model is key to writing efficient async code.</p>
-                                
-                                <h3>Callbacks</h3>
-                                <p>Callbacks are functions passed as arguments to other functions to be executed later:</p>
-                                <pre>function fetchData(callback) {
-    setTimeout(() => {
-        callback('Data received');
-    }, 1000);
-}
+                            description: "Learn professional design patterns for building scalable JavaScript applications.",
+                            content: `<h4>Module Pattern</h4>
+                            <p>The Module pattern provides encapsulation and organization:</p>
+                            <pre>const CounterModule = (function() {
+    let count = 0;
+    
+    const increment = () => {
+        count++;
+        console.log(count);
+    };
+    
+    const reset = () => {
+        count = 0;
+        console.log("Counter reset");
+    };
+    
+    return {
+        increment,
+        reset
+    };
+})();
 
-fetchData((data) => {
-    console.log(data);
-});</pre>
-                                <p>While simple, callbacks can lead to "callback hell" with nested asynchronous operations.</p>
-                                
-                                <h3>Promises</h3>
-                                <p>Promises provide a cleaner way to handle asynchronous operations:</p>
-                                <pre>function fetchData() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve('Data received');
-        }, 1000);
-    });
-}
-
-fetchData()
-    .then(data => {
-        console.log(data);
-        return processData(data);
-    })
-    .then(processed => {
-        console.log(processed);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });</pre>
-                                
-                                <h3>Async/Await</h3>
-                                <p>Async/await provides syntactic sugar over promises, making asynchronous code look synchronous:</p>
-                                <pre>async function getData() {
-    try {
-        const data = await fetchData();
-        const processed = await processData(data);
-        console.log(processed);
-    } catch (error) {
-        console.error('Error:', error);
+CounterModule.increment(); // 1
+CounterModule.increment(); // 2
+CounterModule.reset();     // Counter reset</pre>
+                            
+                            <h4>Observer Pattern</h4>
+                            <p>The Observer pattern allows objects to subscribe to events:</p>
+                            <pre>class EventEmitter {
+    constructor() {
+        this.events = {};
     }
-}</pre>
-                                
-                                <h3>Promise Combinators</h3>
-                                <p>Advanced promise techniques for handling multiple asynchronous operations:</p>
-                                <pre>// Wait for all promises to resolve
-Promise.all([fetchData1(), fetchData2()])
-    .then(([data1, data2]) => {
-        console.log(data1, data2);
-    });
+    
+    on(event, listener) {
+        if (!this.events[event]) {
+            this.events[event] = [];
+        }
+        this.events[event].push(listener);
+    }
+    
+    emit(event, ...args) {
+        if (this.events[event]) {
+            this.events[event].forEach(listener => listener(...args));
+        }
+    }
+}
 
-// Wait for the first promise to resolve
-Promise.race([fetchData1(), fetchData2()])
-    .then(firstData => {
-        console.log(firstData);
-    });
+const emitter = new EventEmitter();
+emitter.on('data', data => console.log('Data received:', data));
+emitter.emit('data', { id: 1, value: 'test' });</pre>
+                            
+                            <h4>Singleton Pattern</h4>
+                            <p>Ensure a class has only one instance:</p>
+                            <pre>class Database {
+    constructor() {
+        if (Database.instance) {
+            return Database.instance;
+        }
+        
+        this.connection = "Connected to database";
+        Database.instance = this;
+    }
+    
+    query(sql) {
+        console.log(\`Executing: \${sql}\`);
+    }
+}
 
-// Get all results (fulfilled or rejected)
-Promise.allSettled([fetchData1(), fetchData2()])
-    .then(results => {
-        results.forEach(result => {
-            if (result.status === 'fulfilled') {
-                console.log(result.value);
-            } else {
-                console.error(result.reason);
-            }
-        });
-    });</pre>
-                            `,
+const db1 = new Database();
+const db2 = new Database();
+console.log(db1 === db2); // true</pre>`,
                             readTime: 75
                         }
                     ],
                     snippets: [
                         {
-                            id: "js-fetch",
+                            id: 1,
                             title: "Fetch API with Error Handling",
                             description: "Robust implementation of fetch with error handling",
                             code: `async function fetchData(url) {
@@ -1426,16 +1379,10 @@ Promise.allSettled([fetchData1(), fetchData2()])
     console.error('Fetch error:', error);
     return null;
   }
-}
-
-// Usage:
-const apiData = await fetchData('https://api.example.com/data');
-if (apiData) {
-  console.log('Data received:', apiData);
 }`
                         },
                         {
-                            id: "js-debounce",
+                            id: 2,
                             title: "Debounce Function",
                             description: "Optimize event handlers with debouncing",
                             code: `function debounce(func, delay) {
@@ -1446,66 +1393,48 @@ if (apiData) {
       func.apply(this, args);
     }, delay);
   };
-}
-
-// Usage:
-const searchInput = document.getElementById('search');
-const debouncedSearch = debounce(search, 300);
-
-searchInput.addEventListener('input', debouncedSearch);
-
-function search() {
-  // Perform search operation
 }`
                         },
                         {
-                            id: "js-array",
-                            title: "Array Manipulation",
-                            description: "Common array operations with modern JavaScript",
-                            code: `// Map: Transform each element
-const numbers = [1, 2, 3];
-const doubled = numbers.map(n => n * 2);
-
-// Filter: Select elements that meet condition
-const evens = numbers.filter(n => n % 2 === 0);
-
-// Reduce: Accumulate values
-const sum = numbers.reduce((total, n) => total + n, 0);
-
-// Find: Get first matching element
-const firstEven = numbers.find(n => n % 2 === 0);
-
-// Some: Check if any element matches
-const hasEven = numbers.some(n => n % 2 === 0);
-
-// Every: Check if all elements match
-const allEven = numbers.every(n => n % 2 === 0);
-
-// FlatMap: Map then flatten
-const phrases = ["hello world", "goodbye moon"];
-const words = phrases.flatMap(phrase => phrase.split(' '));`
+                            id: 3,
+                            title: "Form Validation",
+                            description: "Client-side form validation with custom messages",
+                            code: `function validateForm(form) {
+  const errors = [];
+  const email = form.email.value;
+  
+  if (!email.includes('@')) {
+    errors.push('Please enter a valid email address');
+  }
+  
+  if (form.password.value.length < 8) {
+    errors.push('Password must be at least 8 characters');
+  }
+  
+  return errors;
+}`
                         }
                     ],
                     resources: [
                         {
-                            id: "js-formatter",
+                            id: 1,
                             title: "JSON Formatter",
                             icon: "fas fa-arrows-alt-h",
                             description: "Format and validate your JSON data with syntax highlighting and error detection.",
                             url: "#"
                         },
                         {
-                            id: "js-regex",
+                            id: 2,
                             title: "Regex Tester",
                             icon: "fas fa-terminal",
                             description: "Test and debug regular expressions with live matching and explanation.",
                             url: "#"
                         },
                         {
-                            id: "js-cheatsheet",
-                            title: "Modern JavaScript Cheat Sheet",
-                            icon: "fas fa-file-alt",
-                            description: "Quick reference for ES6+ JavaScript features and syntax.",
+                            id: 3,
+                            title: "DOM Manipulation Cheat Sheet",
+                            icon: "fas fa-code",
+                            description: "Quick reference for common DOM manipulation techniques.",
                             url: "#"
                         }
                     ]
@@ -1518,154 +1447,76 @@ const words = phrases.flatMap(phrase => phrase.split(' '));`
                     description: "Versatile language for web development, data science, AI, and automation.",
                     guides: [
                         {
-                            id: "py-basics",
+                            id: 1,
                             title: "Python Basics",
                             level: "beginner",
                             description: "Learn Python syntax, data structures, and control flow.",
-                            content: `
-                                <h3>Why Python?</h3>
-                                <p>Python is known for its simplicity and readability, making it an excellent choice for beginners. It has a vast ecosystem of libraries and frameworks for various applications.</p>
-                                
-                                <h3>Variables and Data Types</h3>
-                                <p>Python is dynamically typed, meaning you don't need to declare variable types:</p>
-                                <pre># Basic data types
-name = "Alice"           # String
-age = 30                 # Integer
-height = 5.9             # Float
-is_student = True        # Boolean</pre>
-                                
-                                <h3>Data Structures</h3>
-                                <p>Python has several built-in data structures:</p>
-                                <pre># List (mutable sequence)
-numbers = [1, 2, 3, 4, 5]
+                            content: `<h4>Python Fundamentals</h4>
+                            <p>Python is a high-level, interpreted programming language known for its simplicity and readability.</p>
+                            
+                            <h4>Variables and Data Types</h4>
+                            <pre># Variables
+name = "Alice"
+age = 30
+height = 5.9
+is_student = True
 
-# Tuple (immutable sequence)
+# Data types
+print(type(name))        # <class 'str'>
+print(type(age))         # <class 'int'>
+print(type(height))      # <class 'float'>
+print(type(is_student))  # <class 'bool'></pre>
+                            
+                            <h4>Data Structures</h4>
+                            <pre># Lists
+fruits = ["apple", "banana", "cherry"]
+fruits.append("orange")
+
+# Tuples (immutable)
 coordinates = (10.0, 20.5)
 
-# Dictionary (key-value pairs)
-person = {"name": "Alice", "age": 30}
+# Dictionaries
+person = {
+    "name": "Bob",
+    "age": 25,
+    "city": "New York"
+}
 
-# Set (unique elements)
+# Sets
 unique_numbers = {1, 2, 3, 3, 4}  # {1, 2, 3, 4}</pre>
-                                
-                                <h3>Control Flow</h3>
-                                <p>Python uses indentation to define code blocks:</p>
-                                <pre># If-elif-else
-if age < 18:
-    print("Minor")
-elif age < 65:
+                            
+                            <h4>Control Flow</h4>
+                            <pre># If statement
+if age >= 18:
     print("Adult")
+elif age >= 13:
+    print("Teen")
 else:
-    print("Senior")
+    print("Child")
 
 # For loop
-for number in numbers:
-    print(number * 2)
+for fruit in fruits:
+    print(fruit)
 
 # While loop
 count = 0
 while count < 5:
     print(count)
-    count += 1</pre>
-                                
-                                <h3>Functions</h3>
-                                <p>Functions are defined using the def keyword:</p>
-                                <pre>def greet(name):
-    return f"Hello, {name}!"
-
-# Function call
-message = greet("Alice")
-print(message)</pre>
-                            `,
+    count += 1</pre>`,
                             readTime: 40
                         },
                         {
-                            id: "py-oop",
-                            title: "Object-Oriented Python",
-                            level: "intermediate",
-                            description: "Master classes, inheritance, and polymorphism in Python.",
-                            content: `
-                                <h3>Classes and Objects</h3>
-                                <p>Python is an object-oriented programming language. Everything in Python is an object with properties and methods.</p>
-                                
-                                <pre>class Dog:
-    # Class attribute
-    species = "Canis familiaris"
-    
-    # Initializer
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-    
-    # Instance method
-    def description(self):
-        return f"{self.name} is {self.age} years old"
-    
-    # Another instance method
-    def speak(self, sound):
-        return f"{self.name} says {sound}"
-
-# Create instances
-buddy = Dog("Buddy", 9)
-miles = Dog("Miles", 4)
-
-print(buddy.description())
-print(miles.speak("Woof Woof"))</pre>
-                                
-                                <h3>Inheritance</h3>
-                                <p>Create new classes based on existing ones:</p>
-                                <pre>class Bulldog(Dog):
-    def speak(self, sound="Arf"):
-        return super().speak(sound)
-
-class Dachshund(Dog):
-    pass
-
-class JackRussellTerrier(Dog):
-    def speak(self, sound="Arf"):
-        return f"{self.name} says {sound} loudly"
-
-# Create subclass instance
-jim = Bulldog("Jim", 5)
-print(jim.speak())</pre>
-                                
-                                <h3>Special Methods</h3>
-                                <p>Special methods allow your objects to implement Python's built-in operations:</p>
-                                <pre>class Vector:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-    
-    def __repr__(self):
-        return f"Vector({self.x}, {self.y})"
-    
-    def __add__(self, other):
-        return Vector(self.x + other.x, self.y + other.y)
-    
-    def __mul__(self, scalar):
-        return Vector(self.x * scalar, self.y * scalar)
-
-v1 = Vector(2, 4)
-v2 = Vector(1, -2)
-print(v1 + v2)  # Vector(3, 2)
-print(v1 * 3)   # Vector(6, 12)</pre>
-                            `,
-                            readTime: 60
-                        },
-                        {
-                            id: "py-data",
+                            id: 2,
                             title: "Data Analysis with Pandas",
-                            level: "advanced",
-                            description: "Master data manipulation and analysis with the Pandas library.",
-                            content: `
-                                <h3>Introduction to Pandas</h3>
-                                <p>Pandas is a powerful Python library for data manipulation and analysis. It provides data structures like DataFrames and Series that make working with structured data intuitive.</p>
-                                
-                                <h3>DataFrames</h3>
-                                <p>DataFrames are 2-dimensional labeled data structures with columns of potentially different types:</p>
-                                <pre>import pandas as pd
+                            level: "intermediate",
+                            description: "Master data manipulation with Pandas library.",
+                            content: `<h4>Introduction to Pandas</h4>
+                            <p>Pandas is a powerful library for data manipulation and analysis in Python.</p>
+                            
+                            <h4>DataFrames</h4>
+                            <pre>import pandas as pd
 
-# Create DataFrame from dictionary
+# Create DataFrame
 data = {
     'Name': ['Alice', 'Bob', 'Charlie'],
     'Age': [25, 30, 35],
@@ -1674,81 +1525,130 @@ data = {
 
 df = pd.DataFrame(data)
 print(df)</pre>
-                                
-                                <h3>Data Selection</h3>
-                                <p>Selecting data from a DataFrame:</p>
-                                <pre># Select a single column
-ages = df['Age']
+                            
+                            <h4>Data Cleaning</h4>
+                            <pre># Handle missing values
+df.fillna(0, inplace=True)
 
-# Select multiple columns
-subset = df[['Name', 'City']]
+# Remove duplicates
+df.drop_duplicates(inplace=True)
 
-# Select rows by index
-row = df.loc[0]
+# Data transformation
+df['Age'] = df['Age'].apply(lambda x: x * 365)  # Convert to days</pre>
+                            
+                            <h4>Data Analysis</h4>
+                            <pre># Basic statistics
+print(df.describe())
 
-# Select rows by condition
-adults = df[df['Age'] >= 30]</pre>
-                                
-                                <h3>Data Cleaning</h3>
-                                <p>Handling missing data and inconsistencies:</p>
-                                <pre># Check for missing values
-print(df.isnull().sum())
+# Grouping data
+grouped = df.groupby('City')['Age'].mean()
 
-# Fill missing values
-df['Age'].fillna(df['Age'].mean(), inplace=True)
+# Filtering data
+adults = df[df['Age'] >= 18]</pre>`,
+                            readTime: 65
+                        },
+                        {
+                            id: 3,
+                            title: "Flask Web Development",
+                            level: "intermediate",
+                            description: "Build web applications with Flask framework.",
+                            content: `<h4>Getting Started with Flask</h4>
+                            <p>Flask is a lightweight web framework for Python.</p>
+                            
+                            <pre>from flask import Flask
+app = Flask(__name__)
 
-# Drop rows with missing values
-df.dropna(inplace=True)
+@app.route('/')
+def home():
+    return "Hello, World!"
 
-# Convert data types
-df['Age'] = df['Age'].astype(int)</pre>
-                                
-                                <h3>Data Aggregation</h3>
-                                <p>Grouping and summarizing data:</p>
-                                <pre># Group by category
-grouped = df.groupby('City')
+if __name__ == '__main__':
+    app.run(debug=True)</pre>
+                            
+                            <h4>Routing and Templates</h4>
+                            <pre>from flask import render_template
 
-# Calculate group statistics
-print(grouped['Age'].mean())
+@app.route('/user/<username>')
+def show_user(username):
+    return render_template('user.html', username=username)</pre>
+                            
+                            <h4>Working with Forms</h4>
+                            <pre>from flask import request
 
-# More complex aggregation
-print(grouped.agg({
-    'Age': ['min', 'max', 'mean'],
-    'Name': 'count'
-}))</pre>
-                                
-                                <h3>Merging DataFrames</h3>
-                                <p>Combining data from multiple sources:</p>
-                                <pre># Create another DataFrame
-salaries = pd.DataFrame({
-    'Name': ['Alice', 'Bob', 'Charlie'],
-    'Salary': [80000, 90000, 75000]
-})
-
-# Merge DataFrames
-merged = pd.merge(df, salaries, on='Name')
-print(merged)</pre>
-                            `,
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # Validate credentials
+        return f"Welcome {username}!"
+    return render_template('login.html')</pre>`,
                             readTime: 70
+                        }
+                    ],
+                    snippets: [
+                        {
+                            id: 1,
+                            title: "Read CSV File",
+                            description: "Read CSV files with error handling",
+                            code: `import csv
+
+def read_csv(filename):
+    try:
+        with open(filename, 'r') as file:
+            reader = csv.DictReader(file)
+            return [row for row in reader]
+    except FileNotFoundError:
+        print(f"File {filename} not found")
+        return []`
+                        },
+                        {
+                            id: 2,
+                            title: "List Comprehensions",
+                            description: "Powerful one-line list transformations",
+                            code: `# Square numbers
+numbers = [1, 2, 3, 4, 5]
+squared = [n**2 for n in numbers]
+
+# Filter even numbers
+evens = [n for n in numbers if n % 2 == 0]
+
+# Dictionary comprehension
+squares_dict = {n: n**2 for n in numbers}`
+                        },
+                        {
+                            id: 3,
+                            title: "Context Manager",
+                            description: "Custom context manager implementation",
+                            code: `class CustomContext:
+    def __enter__(self):
+        print("Entering context")
+        return self
+        
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Exiting context")
+        
+with CustomContext() as ctx:
+    print("Inside context")`
                         }
                     ],
                     resources: [
                         {
-                            id: "py-env",
+                            id: 1,
                             title: "Virtual Environment Setup",
                             icon: "fas fa-box",
                             description: "Guide to creating isolated Python environments.",
                             url: "#"
                         },
                         {
-                            id: "py-debug",
+                            id: 2,
                             title: "Python Debugger",
                             icon: "fas fa-bug",
                             description: "Interactive debugging tool for Python applications.",
                             url: "#"
                         },
                         {
-                            id: "py-vis",
+                            id: 3,
                             title: "Data Visualization Guide",
                             icon: "fas fa-chart-bar",
                             description: "Create beautiful visualizations with Matplotlib and Seaborn.",
@@ -1764,45 +1664,37 @@ print(merged)</pre>
                     description: "Object-oriented language used for enterprise applications and Android development.",
                     guides: [
                         {
-                            id: "java-basics",
+                            id: 1,
                             title: "Java Fundamentals",
                             level: "beginner",
                             description: "Learn Java syntax, OOP principles, and basic concepts.",
-                            content: `
-                                <h3>Introduction to Java</h3>
-                                <p>Java is a powerful, object-oriented programming language known for its "write once, run anywhere" capability. It's widely used for enterprise applications, Android development, and large-scale systems.</p>
-                                
-                                <h3>Variables and Data Types</h3>
-                                <p>Java is statically typed, meaning variables must be declared with a specific type:</p>
-                                <pre>// Primitive data types
+                            content: `<h4>Introduction to Java</h4>
+                            <p>Java is a class-based, object-oriented programming language designed for portability and reliability.</p>
+                            
+                            <h4>Basic Syntax</h4>
+                            <pre>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}</pre>
+                            
+                            <h4>Variables and Data Types</h4>
+                            <pre>// Primitive types
 int age = 30;
 double price = 19.99;
 char grade = 'A';
 boolean isJavaFun = true;
 
 // Reference types
-String name = "Alice";
-int[] numbers = {1, 2, 3, 4, 5};</pre>
-                                
-                                <h3>Control Structures</h3>
-                                <p>Java provides standard control flow statements:</p>
-                                <pre>// If-else statement
+String name = "John Doe";
+int[] numbers = {1, 2, 3};</pre>
+                            
+                            <h4>Control Structures</h4>
+                            <pre>// If statement
 if (age >= 18) {
     System.out.println("Adult");
 } else {
     System.out.println("Minor");
-}
-
-// Switch statement
-switch (grade) {
-    case 'A':
-        System.out.println("Excellent");
-        break;
-    case 'B':
-        System.out.println("Good");
-        break;
-    default:
-        System.out.println("Invalid grade");
 }
 
 // For loop
@@ -1810,231 +1702,123 @@ for (int i = 0; i < 5; i++) {
     System.out.println(i);
 }
 
-// Enhanced for loop
-for (int number : numbers) {
-    System.out.println(number);
-}</pre>
-                                
-                                <h3>Classes and Objects</h3>
-                                <p>Java is fundamentally object-oriented. Here's a simple class:</p>
-                                <pre>public class Person {
-    // Fields (instance variables)
-    private String name;
-    private int age;
-    
-    // Constructor
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-    
-    // Method
-    public void introduce() {
-        System.out.println("Hello, my name is " + name);
-    }
-    
-    // Getters and setters
-    public String getName() {
-        return name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-}
-
-// Creating objects
-Person alice = new Person("Alice", 30);
-alice.introduce();</pre>
-                            `,
+// While loop
+int i = 0;
+while (i < 5) {
+    System.out.println(i);
+    i++;
+}</pre>`,
                             readTime: 50
                         },
                         {
-                            id: "java-collections",
-                            title: "Java Collections Framework",
-                            level: "intermediate",
-                            description: "Master lists, sets, maps, and other collection types in Java.",
-                            content: `
-                                <h3>Collections Framework Overview</h3>
-                                <p>The Java Collections Framework provides a set of interfaces and classes to store and manipulate groups of data as a single unit.</p>
-                                
-                                <h3>Core Interfaces</h3>
-                                <ul>
-                                    <li><strong>List</strong>: Ordered collection that allows duplicates</li>
-                                    <li><strong>Set</strong>: Collection that doesn't allow duplicates</li>
-                                    <li><strong>Map</strong>: Key-value pairs, keys are unique</li>
-                                    <li><strong>Queue</strong>: Collection designed for holding elements prior to processing</li>
-                                </ul>
-                                
-                                <h3>Common Implementations</h3>
-                                <pre>// List implementations
-List<String> arrayList = new ArrayList<>();  // Resizable array
-List<String> linkedList = new LinkedList<>(); // Doubly-linked list
-
-// Set implementations
-Set<String> hashSet = new HashSet<>();        // Hash table
-Set<String> treeSet = new TreeSet<>();        // Red-black tree
-
-// Map implementations
-Map<String, Integer> hashMap = new HashMap<>(); // Hash table
-Map<String, Integer> treeMap = new TreeMap<>(); // Red-black tree</pre>
-                                
-                                <h3>Common Operations</h3>
-                                <pre>// List operations
-List<String> names = new ArrayList<>();
-names.add("Alice");
-names.add("Bob");
-names.add(0, "Charlie"); // Insert at index 0
-names.remove("Bob");
-String first = names.get(0);
-int size = names.size();
-
-// Set operations
-Set<Integer> numbers = new HashSet<>();
-numbers.add(1);
-numbers.add(2);
-numbers.add(1); // Duplicate, won't be added
-boolean contains = numbers.contains(2);
-
-// Map operations
-Map<String, Integer> ages = new HashMap<>();
-ages.put("Alice", 30);
-ages.put("Bob", 25);
-int aliceAge = ages.get("Alice");
-ages.remove("Bob");</pre>
-                                
-                                <h3>Iterating Collections</h3>
-                                <pre>// Iterate list
-for (String name : names) {
-    System.out.println(name);
-}
-
-// Iterate map
-for (Map.Entry<String, Integer> entry : ages.entrySet()) {
-    System.out.println(entry.getKey() + ": " + entry.getValue());
-}
-
-// Using iterator
-Iterator<String> iterator = names.iterator();
-while (iterator.hasNext()) {
-    System.out.println(iterator.next());
-}</pre>
-                            `,
-                            readTime: 65
-                        },
-                        {
-                            id: "java-spring",
+                            id: 2,
                             title: "Spring Boot REST API",
-                            level: "advanced",
+                            level: "intermediate",
                             description: "Build RESTful APIs with Spring Boot framework.",
-                            content: `
-                                <h3>What is Spring Boot?</h3>
-                                <p>Spring Boot is an extension of the Spring framework that simplifies the bootstrapping and development of new Spring applications. It provides defaults for code and annotation configuration to quickstart new projects.</p>
-                                
-                                <h3>Creating a Spring Boot Project</h3>
-                                <p>Use Spring Initializr (https://start.spring.io/) to generate a project with required dependencies:</p>
-                                <ul>
-                                    <li>Spring Web (for building web applications)</li>
-                                    <li>Spring Data JPA (for database access)</li>
-                                    <li>Lombok (for reducing boilerplate code)</li>
-                                </ul>
-                                
-                                <h3>Project Structure</h3>
-                                <pre>src/
-├── main/
-│   ├── java/
-│   │   └── com/
-│   │       └── example/
-│   │           └── demo/
-│   │               ├── DemoApplication.java
-│   │               ├── controller/
-│   │               ├── model/
-│   │               ├── repository/
-│   │               └── service/
-│   └── resources/
-│       ├── application.properties
-│       └── static/
-└── test/
-    └── java/</pre>
-                                
-                                <h3>Creating a REST Controller</h3>
-                                <pre>@RestController
+                            content: `<h4>Spring Boot Overview</h4>
+                            <p>Spring Boot simplifies the development of production-ready applications with Spring.</p>
+                            
+                            <h4>Creating a REST Controller</h4>
+                            <pre>@RestController
 @RequestMapping("/api/products")
 public class ProductController {
     
-    @Autowired
-    private ProductService productService;
-    
     @GetMapping
     public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+        // Return list of products
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        return productService.getProductById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public Product getProductById(@PathVariable Long id) {
+        // Return product by ID
     }
     
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        Product savedProduct = productService.saveProduct(product);
-        return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
-    }
-    
-    @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        return productService.getProductById(id)
-                .map(existing -> {
-                    product.setId(id);
-                    return ResponseEntity.ok(productService.saveProduct(product));
-                })
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-    
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
-        productService.deleteProduct(id);
-        return ResponseEntity.noContent().build();
+    public Product createProduct(@RequestBody Product product) {
+        // Create new product
     }
 }</pre>
-                                
-                                <h3>Service Layer</h3>
-                                <pre>@Service
-@RequiredArgsConstructor
-public class ProductService {
+                            
+                            <h4>Database Integration</h4>
+                            <pre>@Entity
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private BigDecimal price;
     
-    private final ProductRepository productRepository;
-    
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
-    
-    public Optional<Product> getProductById(Long id) {
-        return productRepository.findById(id);
-    }
-    
-    public Product saveProduct(Product product) {
-        return productRepository.save(product);
-    }
-    
-    public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
-    }
+    // Getters and setters
+}
+
+public interface ProductRepository extends JpaRepository<Product, Long> {
 }</pre>
-                                
-                                <h3>Repository Layer</h3>
-                                <pre>public interface ProductRepository extends JpaRepository<Product, Long> {
-    // Custom query methods can be defined here
-}</pre>
-                            `,
+                            
+                            <h4>Exception Handling</h4>
+                            <pre>@ControllerAdvice
+public class GlobalExceptionHandler {
+    
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<?> handleResourceNotFound(ResourceNotFoundException ex) {
+        ErrorDetails error = new ErrorDetails("Not Found", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+}</pre>`,
                             readTime: 75
+                        },
+                        {
+                            id: 3,
+                            title: "Java Concurrency",
+                            level: "advanced",
+                            description: "Deep dive into Java's concurrency model.",
+                            content: `<h4>Threads and Runnables</h4>
+                            <pre>// Extending Thread class
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread is running");
+    }
+}
+
+// Implementing Runnable
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Runnable is running");
+    }
+}
+
+// Starting threads
+new MyThread().start();
+new Thread(new MyRunnable()).start();</pre>
+                            
+                            <h4>Thread Pools</h4>
+                            <pre>ExecutorService executor = Executors.newFixedThreadPool(5);
+
+for (int i = 0; i < 10; i++) {
+    executor.execute(() -> {
+        System.out.println("Task executed by " + Thread.currentThread().getName());
+    });
+}
+
+executor.shutdown();</pre>
+                            
+                            <h4>Synchronization</h4>
+                            <pre>class Counter {
+    private int count = 0;
+    
+    public synchronized void increment() {
+        count++;
+    }
+    
+    public int getCount() {
+        return count;
+    }
+}</pre>`,
+                            readTime: 90
                         }
                     ],
                     snippets: [
                         {
-                            id: "java-file",
+                            id: 1,
                             title: "File Reading",
                             description: "Read file line by line with exception handling",
                             code: `import java.io.BufferedReader;
@@ -2057,15 +1841,13 @@ public class ReadFile {
 }`
                         },
                         {
-                            id: "java-singleton",
+                            id: 2,
                             title: "Singleton Pattern",
                             description: "Thread-safe singleton implementation",
                             code: `public class Singleton {
     private static volatile Singleton instance;
     
-    private Singleton() {
-        // Private constructor to prevent instantiation
-    }
+    private Singleton() {}
     
     public static Singleton getInstance() {
         if (instance == null) {
@@ -2080,12 +1862,11 @@ public class ReadFile {
 }`
                         },
                         {
-                            id: "java-lambda",
+                            id: 3,
                             title: "Lambda Expressions",
                             description: "Functional programming with lambdas",
                             code: `import java.util.List;
 import java.util.Arrays;
-import java.util.function.Consumer;
 
 public class LambdaExample {
     public static void main(String[] args) {
@@ -2097,376 +1878,34 @@ public class LambdaExample {
         // Using method reference
         names.forEach(System.out::println);
         
-        // Custom consumer with lambda
-        Consumer<String> printUpperCase = s -> System.out.println(s.toUpperCase());
-        names.forEach(printUpperCase);
-        
-        // Sorting with lambda
-        names.sort((s1, s2) -> s1.compareTo(s2));
-        
-        // Thread with lambda
-        new Thread(() -> {
-            System.out.println("Running in a new thread");
-        }).start();
+        // Filtering with stream
+        names.stream()
+             .filter(name -> name.startsWith("A"))
+             .forEach(System.out::println);
     }
 }`
                         }
                     ],
                     resources: [
                         {
-                            id: "java-collections",
+                            id: 1,
                             title: "Java Collections Cheat Sheet",
                             icon: "fas fa-layer-group",
                             description: "Quick reference for Java collection classes.",
                             url: "#"
                         },
                         {
-                            id: "java-junit",
+                            id: 2,
                             title: "JUnit Testing Guide",
                             icon: "fas fa-vial",
                             description: "Unit testing in Java with JUnit framework.",
                             url: "#"
                         },
                         {
-                            id: "java-spring",
+                            id: 3,
                             title: "Spring Boot Reference",
                             icon: "fas fa-leaf",
                             description: "Official Spring Boot documentation and examples.",
-                            url: "#"
-                        }
-                    ]
-                },
-                {
-                    id: "csharp",
-                    name: "C#",
-                    icon: "fas fa-copyright",
-                    color: "#239120",
-                    description: "Modern language for Windows applications, games with Unity, and enterprise software.",
-                    guides: [
-                        {
-                            id: "csharp-basics",
-                            title: "C# Fundamentals",
-                            level: "beginner",
-                            description: "Learn C# syntax, OOP principles, and .NET basics.",
-                            content: `
-                                <h3>Introduction to C#</h3>
-                                <p>C# (pronounced "C Sharp") is a modern, object-oriented programming language developed by Microsoft. It's part of the .NET ecosystem and is widely used for Windows applications, web development with ASP.NET, and game development with Unity.</p>
-                                
-                                <h3>Variables and Data Types</h3>
-                                <p>C# is statically typed, meaning variables must be declared with a specific type:</p>
-                                <pre>// Basic data types
-string name = "Alice";
-int age = 30;
-double height = 5.9;
-bool isStudent = true;</pre>
-                                
-                                <h3>Control Structures</h3>
-                                <p>C# provides standard control flow statements:</p>
-                                <pre>// If-else statement
-if (age >= 18) {
-    Console.WriteLine("Adult");
-} else {
-    Console.WriteLine("Minor");
-}
-
-// Switch statement
-switch (grade) {
-    case 'A':
-        Console.WriteLine("Excellent");
-        break;
-    case 'B':
-        Console.WriteLine("Good");
-        break;
-    default:
-        Console.WriteLine("Invalid grade");
-        break;
-}
-
-// For loop
-for (int i = 0; i < 5; i++) {
-    Console.WriteLine(i);
-}
-
-// Foreach loop
-string[] names = { "Alice", "Bob", "Charlie" };
-foreach (string n in names) {
-    Console.WriteLine(n);
-}</pre>
-                                
-                                <h3>Classes and Objects</h3>
-                                <p>C# is fundamentally object-oriented. Here's a simple class:</p>
-                                <pre>public class Person {
-    // Fields
-    private string name;
-    private int age;
-    
-    // Constructor
-    public Person(string name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-    
-    // Method
-    public void Introduce() {
-        Console.WriteLine($"Hello, my name is {name}");
-    }
-    
-    // Properties
-    public string Name {
-        get { return name; }
-        set { name = value; }
-    }
-}
-
-// Creating objects
-Person alice = new Person("Alice", 30);
-alice.Introduce();</pre>
-                            `,
-                            readTime: 45
-                        },
-                        {
-                            id: "csharp-linq",
-                            title: "LINQ in C#",
-                            level: "intermediate",
-                            description: "Master Language Integrated Query for efficient data manipulation.",
-                            content: `
-                                <h3>What is LINQ?</h3>
-                                <p>Language Integrated Query (LINQ) is a powerful feature in C# that provides a consistent model for querying various data sources (collections, databases, XML) using a SQL-like syntax.</p>
-                                
-                                <h3>Basic LINQ Queries</h3>
-                                <pre>List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-
-// Query syntax
-var evenNumbers = from num in numbers
-                  where num % 2 == 0
-                  select num;
-
-// Method syntax
-var evenNumbers = numbers.Where(num => num % 2 == 0);
-
-// Both return: 2, 4, 6, 8, 10</pre>
-                                
-                                <h3>Common LINQ Operations</h3>
-                                <pre>// Filtering
-var adults = people.Where(p => p.Age >= 18);
-
-// Projection
-var names = people.Select(p => p.Name);
-
-// Ordering
-var orderedPeople = people.OrderBy(p => p.Age);
-
-// Grouping
-var peopleByCity = people.GroupBy(p => p.City);
-
-// Aggregation
-int totalAge = people.Sum(p => p.Age);
-double averageAge = people.Average(p => p.Age);
-int maxAge = people.Max(p => p.Age);</pre>
-                                
-                                <h3>LINQ with Custom Objects</h3>
-                                <pre>public class Person {
-    public string Name { get; set; }
-    public int Age { get; set; }
-    public string City { get; set; }
-}
-
-List<Person> people = new List<Person> {
-    new Person { Name = "Alice", Age = 30, City = "New York" },
-    new Person { Name = "Bob", Age = 25, City = "London" },
-    new Person { Name = "Charlie", Age = 35, City = "Paris" }
-};
-
-// Complex query
-var result = from p in people
-             where p.Age > 25
-             group p by p.City into cityGroup
-             select new {
-                 City = cityGroup.Key,
-                 Count = cityGroup.Count(),
-                 AverageAge = cityGroup.Average(p => p.Age)
-             };
-
-foreach (var item in result) {
-    Console.WriteLine($"{item.City}: {item.Count} people, avg age {item.AverageAge}");
-}</pre>
-                            `,
-                            readTime: 60
-                        },
-                        {
-                            id: "csharp-async",
-                            title: "Asynchronous Programming in C#",
-                            level: "advanced",
-                            description: "Master async/await for efficient asynchronous operations.",
-                            content: `
-                                <h3>Async/Await Pattern</h3>
-                                <p>The async and await keywords in C# simplify asynchronous programming by allowing you to write asynchronous code that looks synchronous.</p>
-                                
-                                <pre>public async Task<string> DownloadContentAsync(string url) {
-    using (HttpClient client = new HttpClient()) {
-        return await client.GetStringAsync(url);
-    }
-}</pre>
-                                
-                                <h3>Async Method Structure</h3>
-                                <pre>// Async method declaration
-public async Task<int> CalculateResultAsync() {
-    // Asynchronous operation
-    int result = await LongRunningOperationAsync();
-    
-    // You can do other work here that doesn't require the result
-    DoIndependentWork();
-    
-    return result;
-}</pre>
-                                
-                                <h3>Error Handling</h3>
-                                <pre>public async Task ProcessDataAsync() {
-    try {
-        await FetchDataAsync();
-        await ProcessDataAsync();
-    }
-    catch (HttpRequestException ex) {
-        Console.WriteLine($"Network error: {ex.Message}");
-    }
-    catch (InvalidOperationException ex) {
-        Console.WriteLine($"Processing error: {ex.Message}");
-    }
-    finally {
-        await CleanupAsync();
-    }
-}</pre>
-                                
-                                <h3>Running Tasks Concurrently</h3>
-                                <pre>public async Task ProcessMultipleAsync() {
-    Task<string> task1 = DownloadContentAsync("https://api.example.com/data1");
-    Task<string> task2 = DownloadContentAsync("https://api.example.com/data2");
-    
-    // Wait for both tasks to complete
-    await Task.WhenAll(task1, task2);
-    
-    // Access results
-    string result1 = await task1;
-    string result2 = await task2;
-    
-    // Process results
-    Console.WriteLine(result1);
-    Console.WriteLine(result2);
-}</pre>
-                                
-                                <h3>ValueTask for Performance</h3>
-                                <pre>public ValueTask<int> CachedCalculationAsync() {
-    if (cachedResultAvailable) {
-        return new ValueTask<int>(cachedResult);
-    }
-    
-    return new ValueTask<int>(LoadAndCacheResultAsync());
-}
-
-private async Task<int> LoadAndCacheResultAsync() {
-    // Simulate async work
-    await Task.Delay(100);
-    cachedResult = 42;
-    cachedResultAvailable = true;
-    return cachedResult;
-}</pre>
-                            `,
-                            readTime: 70
-                        }
-                    ],
-                    snippets: [
-                        {
-                            id: "csharp-properties",
-                            title: "Auto-Implemented Properties",
-                            description: "Modern property syntax in C#",
-                            code: `public class Person {
-    // Auto-implemented properties
-    public string Name { get; set; }
-    public int Age { get; set; }
-    
-    // Read-only property
-    public string DisplayName => $"{Name}, {Age}";
-    
-    // Property with validation
-    private string email;
-    public string Email {
-        get => email;
-        set {
-            if (value.Contains("@")) {
-                email = value;
-            } else {
-                throw new ArgumentException("Invalid email format");
-            }
-        }
-    }
-}`
-                        },
-                        {
-                            id: "csharp-extension",
-                            title: "Extension Methods",
-                            description: "Add methods to existing types",
-                            code: `public static class StringExtensions {
-    public static bool IsPalindrome(this string str) {
-        if (string.IsNullOrEmpty(str)) return false;
-        
-        int left = 0;
-        int right = str.Length - 1;
-        
-        while (left < right) {
-            if (char.ToLower(str[left]) != char.ToLower(str[right])) {
-                return false;
-            }
-            left++;
-            right--;
-        }
-        return true;
-    }
-}
-
-// Usage:
-string test = "radar";
-bool isPal = test.IsPalindrome(); // true`
-                        },
-                        {
-                            id: "csharp-pattern",
-                            title: "Pattern Matching",
-                            description: "Modern pattern matching features",
-                            code: `public static string GetShapeDescription(object shape) {
-    return shape switch {
-        Circle c => $"Circle with radius {c.Radius}",
-        Rectangle r when r.Width == r.Height => $"Square with side {r.Width}",
-        Rectangle r => $"Rectangle {r.Width}x{r.Height}",
-        Triangle t => $"Triangle with sides {t.SideA}, {t.SideB}, {t.SideC}",
-        _ => "Unknown shape"
-    };
-}
-
-// Type patterns
-if (shape is Circle { Radius: > 10 } largeCircle) {
-    Console.WriteLine($"Large circle: {largeCircle.Radius}");
-}`
-                        }
-                    ],
-                    resources: [
-                        {
-                            id: "csharp-linq",
-                            title: "LINQ Query Examples",
-                            icon: "fas fa-database",
-                            description: "Comprehensive examples of LINQ queries.",
-                            url: "#"
-                        },
-                        {
-                            id: "csharp-ef",
-                            title: "Entity Framework Guide",
-                            icon: "fas fa-server",
-                            description: "Object-relational mapping with Entity Framework.",
-                            url: "#"
-                        },
-                        {
-                            id: "csharp-aspnet",
-                            title: "ASP.NET Core Tutorials",
-                            icon: "fas fa-globe",
-                            description: "Build web applications with ASP.NET Core.",
                             url: "#"
                         }
                     ]
@@ -2482,37 +1921,10 @@ if (shape is Circle { Radius: > 10 } largeCircle) {
                 return this.languages.find(lang => lang.id === id);
             },
             
-            getAllGuides: function() {
-                return this.languages.flatMap(lang => 
-                    lang.guides.map(guide => ({
-                        ...guide,
-                        language: lang.name,
-                        languageIcon: lang.icon
-                    }))
-                );
-            },
-            
-            getAllResources: function() {
-                return this.languages.flatMap(lang => 
-                    lang.resources.map(resource => ({
-                        ...resource,
-                        language: lang.name
-                    }))
-                );
-            },
-            
-            getGuideById: function(id) {
-                for (const lang of this.languages) {
-                    const guide = lang.guides.find(g => g.id === id);
-                    if (guide) {
-                        return {
-                            ...guide,
-                            language: lang.name,
-                            languageIcon: lang.icon
-                        };
-                    }
-                }
-                return null;
+            getGuideById: function(languageId, guideId) {
+                const language = this.getLanguageById(languageId);
+                if (!language) return null;
+                return language.guides.find(g => g.id === parseInt(guideId));
             }
         };
 
@@ -2525,9 +1937,8 @@ if (shape is Circle { Radius: > 10 } largeCircle) {
                 this.setupEventListeners();
                 this.renderLanguages();
                 this.renderFooterLanguages();
-                this.renderAllGuides();
-                this.renderAllResources();
                 this.showView('home');
+                this.loadThemePreference();
             },
             
             setupEventListeners: function() {
@@ -2535,8 +1946,8 @@ if (shape is Circle { Radius: > 10 } largeCircle) {
                 document.getElementById('home-link').addEventListener('click', () => this.showView('home'));
                 document.getElementById('home-nav').addEventListener('click', () => this.showView('home'));
                 document.getElementById('languages-nav').addEventListener('click', () => this.showView('languages'));
-                document.getElementById('resources-nav').addEventListener('click', () => this.showView('resources'));
-                document.getElementById('guides-nav').addEventListener('click', () => this.showView('guides'));
+                document.getElementById('resources-nav').addEventListener('click', () => this.showResourcesPage());
+                document.getElementById('guides-nav').addEventListener('click', () => this.showGuidesPage());
                 document.getElementById('about-nav').addEventListener('click', () => this.showView('about'));
                 document.getElementById('explore-btn').addEventListener('click', () => this.showView('languages'));
                 
@@ -2554,14 +1965,7 @@ if (shape is Circle { Radius: > 10 } largeCircle) {
                     });
                 });
                 
-                // Footer navigation
-                document.getElementById('footer-resources').addEventListener('click', () => this.showView('resources'));
-                document.getElementById('footer-snippets').addEventListener('click', () => this.showView('resources'));
-                document.getElementById('footer-guides').addEventListener('click', () => this.showView('guides'));
-                document.getElementById('footer-contribute').addEventListener('click', () => alert('Contribution guide coming soon!'));
-                document.getElementById('footer-report').addEventListener('click', () => alert('Report issues on our GitHub repository'));
-                
-                // Modal
+                // Modal close
                 document.getElementById('close-modal').addEventListener('click', () => this.closeModal());
             },
             
@@ -2572,8 +1976,6 @@ if (shape is Circle { Radius: > 10 } largeCircle) {
                 document.getElementById('home-view').style.display = 'none';
                 document.getElementById('languages-view').style.display = 'none';
                 document.getElementById('language-detail-view').style.display = 'none';
-                document.getElementById('resources-view').style.display = 'none';
-                document.getElementById('guides-view').style.display = 'none';
                 document.getElementById('about-view').style.display = 'none';
                 
                 // Show the selected view
@@ -2583,16 +1985,26 @@ if (shape is Circle { Radius: > 10 } largeCircle) {
                     document.getElementById('languages-view').style.display = 'block';
                 } else if (viewName === 'language') {
                     document.getElementById('language-detail-view').style.display = 'block';
-                } else if (viewName === 'resources') {
-                    document.getElementById('resources-view').style.display = 'block';
-                } else if (viewName === 'guides') {
-                    document.getElementById('guides-view').style.display = 'block';
                 } else if (viewName === 'about') {
                     document.getElementById('about-view').style.display = 'block';
                 }
                 
                 // Scroll to top
                 window.scrollTo(0, 0);
+            },
+            
+            showResourcesPage: function() {
+                this.showLanguageDetail('javascript');
+                setTimeout(() => {
+                    this.switchTab('resources');
+                }, 100);
+            },
+            
+            showGuidesPage: function() {
+                this.showLanguageDetail('javascript');
+                setTimeout(() => {
+                    this.switchTab('guides');
+                }, 100);
             },
             
             showLanguageDetail: function(languageId) {
@@ -2690,7 +2102,7 @@ if (shape is Circle { Radius: > 10 } largeCircle) {
                 let html = '';
                 languages.forEach(lang => {
                     html += `
-                    <li><a href="#" data-id="${lang.id}" class="footer-language"><i class="${lang.icon}"></i> ${lang.name}</a></li>
+                    <li><a href="#" data-id="${lang.id}" class="footer-language">${lang.name}</a></li>
                     `;
                 });
                 
@@ -2713,12 +2125,12 @@ if (shape is Circle { Radius: > 10 } largeCircle) {
                 let html = '';
                 this.currentLanguage.guides.forEach(guide => {
                     html += `
-                    <div class="guide-card ${guide.level}" data-id="${guide.id}">
+                    <div class="guide-card ${guide.level}">
                         <div class="guide-level">${guide.level.charAt(0).toUpperCase() + guide.level.slice(1)} Level</div>
                         <div class="guide-content">
                             <h3>${guide.title}</h3>
                             <p>${guide.description}</p>
-                            <button class="btn btn-primary">Read Guide</button>
+                            <button class="btn btn-primary read-guide" data-id="${guide.id}">Read Guide</button>
                         </div>
                         <div class="guide-meta">
                             <span>${this.currentLanguage.name}</span>
@@ -2730,46 +2142,29 @@ if (shape is Circle { Radius: > 10 } largeCircle) {
                 
                 container.innerHTML = html;
                 
-                // Add event listeners
-                document.querySelectorAll('.guide-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const guideId = card.dataset.id;
+                // Add event listeners to guide buttons
+                document.querySelectorAll('.read-guide').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const guideId = btn.dataset.id;
                         this.showGuide(guideId);
                     });
                 });
             },
             
-            renderAllGuides: function() {
-                const container = document.getElementById('all-guides-container');
-                const guides = backendAPI.getAllGuides();
+            showGuide: function(guideId) {
+                if (!this.currentLanguage) return;
                 
-                let html = '';
-                guides.forEach(guide => {
-                    html += `
-                    <div class="guide-card ${guide.level}" data-id="${guide.id}">
-                        <div class="guide-level">${guide.level.charAt(0).toUpperCase() + guide.level.slice(1)} Level</div>
-                        <div class="guide-content">
-                            <h3><i class="${guide.languageIcon}"></i> ${guide.title}</h3>
-                            <p>${guide.description}</p>
-                            <button class="btn btn-primary">Read Guide</button>
-                        </div>
-                        <div class="guide-meta">
-                            <span>${guide.language}</span>
-                            <span>${guide.readTime} min read</span>
-                        </div>
-                    </div>
-                    `;
-                });
+                const guide = backendAPI.getGuideById(this.currentLanguage.id, guideId);
+                if (!guide) return;
                 
-                container.innerHTML = html;
+                document.getElementById('modal-title').textContent = guide.title;
+                document.getElementById('modal-body').innerHTML = guide.content;
                 
-                // Add event listeners
-                document.querySelectorAll('#all-guides-container .guide-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const guideId = card.dataset.id;
-                        this.showGuide(guideId);
-                    });
-                });
+                document.getElementById('guide-modal').style.display = 'block';
+            },
+            
+            closeModal: function() {
+                document.getElementById('guide-modal').style.display = 'none';
             },
             
             renderSnippets: function() {
@@ -2840,64 +2235,6 @@ if (shape is Circle { Radius: > 10 } largeCircle) {
                 container.innerHTML = html;
             },
             
-            renderAllResources: function() {
-                const container = document.getElementById('all-resources-container');
-                const resources = backendAPI.getAllResources();
-                
-                let html = '';
-                resources.forEach(res => {
-                    html += `
-                    <div class="resource-card">
-                        <div class="resource-header">
-                            <i class="${res.icon}"></i>
-                            <h3>${res.title}</h3>
-                        </div>
-                        <div class="resource-body">
-                            <p>${res.description}</p>
-                        </div>
-                        <div class="resource-footer">
-                            <div class="language-tag">${res.language}</div>
-                            <a href="${res.url}" class="btn btn-primary">View Resource</a>
-                        </div>
-                    </div>
-                    `;
-                });
-                
-                container.innerHTML = html;
-            },
-            
-            showGuide: function(guideId) {
-                const guide = backendAPI.getGuideById(guideId);
-                if (!guide) return;
-                
-                // Update modal content
-                document.getElementById('modal-title').textContent = guide.title;
-                document.getElementById('modal-level').textContent = guide.level.charAt(0).toUpperCase() + guide.level.slice(1) + " Level";
-                document.getElementById('modal-language').textContent = guide.language;
-                document.getElementById('modal-time').textContent = guide.readTime + " min read";
-                document.getElementById('modal-body').innerHTML = guide.content;
-                
-                // Style level badge
-                const levelBadge = document.getElementById('modal-level');
-                levelBadge.className = 'guide-level-badge';
-                if (guide.level === 'beginner') {
-                    levelBadge.classList.add('beginner');
-                } else if (guide.level === 'intermediate') {
-                    levelBadge.classList.add('intermediate');
-                } else if (guide.level === 'advanced') {
-                    levelBadge.classList.add('advanced');
-                }
-                
-                // Show modal
-                document.getElementById('guide-modal').style.display = 'block';
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
-            },
-            
-            closeModal: function() {
-                document.getElementById('guide-modal').style.display = 'none';
-                document.body.style.overflow = ''; // Restore scrolling
-            },
-            
             toggleTheme: function() {
                 const body = document.body;
                 const themeBtn = document.getElementById('theme-toggle');
@@ -2931,7 +2268,6 @@ if (shape is Circle { Radius: > 10 } largeCircle) {
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
             app.init();
-            app.loadThemePreference();
         });
     </script>
 </body>
