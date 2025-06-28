@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GHP Cloner - Professional Discord Server Cloning Tool</title>
+    <title>GHP Cloner - Free Discord Server Cloning Tool</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.keyauth.com/v2/dist/keyauth.js"></script>
     <style>
         :root {
             --primary: #6a0dad;
@@ -19,7 +18,6 @@
             --input-bg: #1a1a2a;
             --success: #4caf50;
             --error: #f44336;
-            --warning: #ff9800;
         }
         
         * {
@@ -226,7 +224,7 @@
             margin-bottom: 15px;
         }
         
-        /* Download Section with KeyAuth */
+        /* Download Section */
         .download-section {
             background: var(--card-bg);
             border-radius: 15px;
@@ -247,43 +245,10 @@
             margin-bottom: 30px;
         }
         
-        .keyauth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        
-        .form-group {
-            text-align: left;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 14px 20px;
-            background: var(--input-bg);
-            border: 1px solid rgba(106, 13, 173, 0.3);
-            border-radius: 8px;
-            color: var(--text);
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.2);
-        }
-        
         .download-btn {
             width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
             padding: 15px;
             font-size: 1.1rem;
             font-weight: 600;
@@ -293,148 +258,6 @@
             margin-top: 20px;
             color: var(--text-secondary);
             font-size: 0.9rem;
-        }
-        
-        .status-message {
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-weight: 500;
-            display: none;
-        }
-        
-        .status-success {
-            background: rgba(76, 175, 80, 0.2);
-            border: 1px solid var(--success);
-            color: var(--success);
-            display: block;
-        }
-        
-        .status-error {
-            background: rgba(244, 67, 54, 0.2);
-            border: 1px solid var(--error);
-            color: var(--error);
-            display: block;
-        }
-        
-        /* Screenshots Section */
-        .screenshots {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 80px;
-        }
-        
-        .screenshot-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(106, 13, 173, 0.3);
-        }
-        
-        .screenshot-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .screenshot-content {
-            padding: 20px;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 80px;
-        }
-        
-        .testimonial-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid rgba(106, 13, 173, 0.3);
-        }
-        
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-        
-        .testimonial-name {
-            font-weight: 600;
-        }
-        
-        .testimonial-role {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        .testimonial-content {
-            font-style: italic;
-        }
-        
-        .testimonial-rating {
-            color: var(--warning);
-            margin-top: 10px;
-        }
-        
-        /* FAQ Section */
-        .faq-section {
-            max-width: 800px;
-            margin: 0 auto 80px;
-        }
-        
-        .faq-item {
-            background: var(--card-bg);
-            border-radius: 10px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(106, 13, 173, 0.3);
-        }
-        
-        .faq-question {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        
-        .faq-question i {
-            transition: transform 0.3s;
-        }
-        
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s, padding 0.3s;
-        }
-        
-        .faq-item.active .faq-answer {
-            padding: 0 20px 20px;
-            max-height: 200px;
-        }
-        
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
         }
         
         /* About Section */
@@ -607,9 +430,8 @@
                 <ul id="navMenu">
                     <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#features">Features</a></li>
-                    <li><a href="#screenshots">Screenshots</a></li>
                     <li><a href="#download">Download</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#about">About</a></li>
                     <li><a href="https://discord.gg/QYhtNsGEbj" target="_blank">Discord</a></li>
                 </ul>
             </nav>
@@ -619,8 +441,8 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
-            <h1>Professional Discord Server Cloning</h1>
-            <p>GHP Cloner is the ultimate tool for Discord server administrators. Clone roles, channels, and settings between servers with just a few clicks.</p>
+            <h1>Free Discord Server Cloning Tool</h1>
+            <p>GHP Cloner is now completely free! Clone server roles and channels between Discord servers with our easy-to-use application.</p>
             <div class="hero-btns">
                 <a href="#download" class="btn btn-primary">
                     <i class="fas fa-download"></i> Download Now
@@ -683,126 +505,28 @@
         </div>
     </section>
 
-    <!-- Screenshots Section -->
-    <section id="screenshots">
-        <div class="container">
-            <h2 class="section-title">Application Screenshots</h2>
-            <div class="screenshots">
-                <div class="screenshot-card">
-                    <div class="screenshot-img" style="background: linear-gradient(135deg, #4b0082, #6a0dad); display: flex; justify-content: center; align-items: center;">
-                        <i class="fas fa-home" style="font-size: 5rem; color: white;"></i>
-                    </div>
-                    <div class="screenshot-content">
-                        <h3>Main Dashboard</h3>
-                        <p>Clean and intuitive interface for easy navigation</p>
-                    </div>
-                </div>
-                <div class="screenshot-card">
-                    <div class="screenshot-img" style="background: linear-gradient(135deg, #4b0082, #6a0dad); display: flex; justify-content: center; align-items: center;">
-                        <i class="fas fa-server" style="font-size: 5rem; color: white;"></i>
-                    </div>
-                    <div class="screenshot-content">
-                        <h3>Server Cloning</h3>
-                        <p>Configure your server cloning process</p>
-                    </div>
-                </div>
-                <div class="screenshot-card">
-                    <div class="screenshot-img" style="background: linear-gradient(135deg, #4b0082, #6a0dad); display: flex; justify-content: center; align-items: center;">
-                        <i class="fas fa-key" style="font-size: 5rem; color: white;"></i>
-                    </div>
-                    <div class="screenshot-content">
-                        <h3>License Activation</h3>
-                        <p>Activate your license to unlock all features</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Download Section with KeyAuth -->
+    <!-- Download Section -->
     <section id="download">
         <div class="container">
             <h2 class="section-title">Download GHP Cloner</h2>
             <div class="download-section">
                 <h2>Get the Latest Version</h2>
-                <p>Enter your license key to download the latest version of GHP Cloner</p>
+                <p>GHP Cloner is now completely free to use! Download the latest version below.</p>
                 
-                <div class="keyauth-form">
-                    <div class="form-group">
-                        <label for="keyauth-username">Username</label>
-                        <input type="text" id="keyauth-username" class="form-input" placeholder="Enter your username">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="keyauth-license">License Key</label>
-                        <input type="text" id="keyauth-license" class="form-input" placeholder="Enter your license key">
-                    </div>
-                    
-                    <button id="verifyBtn" class="btn btn-primary download-btn">
-                        <i class="fas fa-key"></i> Verify & Download
-                    </button>
-                    
-                    <div id="statusMessage" class="status-message"></div>
-                </div>
+                <a href="#" class="btn btn-primary download-btn">
+                    <i class="fas fa-download"></i> Download APK
+                </a>
                 
                 <p class="version-info">Current Version: v1.1.0 | Updated: June 28, 2025</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq">
-        <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-section">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Is GHP Cloner safe to use?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes, GHP Cloner is completely safe. It runs locally on your device and doesn't store or share your Discord token. All cloning operations are performed directly through Discord's API.</p>
-                    </div>
-                </div>
                 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What permissions do I need to clone a server?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>You need to be an administrator on both the source and target servers. The bot requires the "Manage Server" permission to create roles and channels.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How long does the cloning process take?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>The cloning process typically takes 1-2 minutes, depending on the size of the server. Larger servers with many roles and channels may take slightly longer.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Can I clone server emojis and stickers?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Currently, GHP Cloner focuses on cloning roles and channels. Emoji and sticker cloning will be added in a future update.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How do I get a license key?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>License keys can be purchased through our Discord server. Join our community to get access to the latest versions and support.</p>
-                    </div>
+                <div style="margin-top: 30px;">
+                    <h3>Installation Instructions</h3>
+                    <ol style="text-align: left; max-width: 500px; margin: 15px auto;">
+                        <li>Download the APK file</li>
+                        <li>Enable "Install from unknown sources" in Android settings</li>
+                        <li>Open the downloaded file to install</li>
+                        <li>Launch the app and start cloning servers!</li>
+                    </ol>
                 </div>
             </div>
         </div>
@@ -821,14 +545,14 @@
                 <div class="about-content">
                     <h3>Developed by GhostGamer (@ghstgmr)</h3>
                     <p>GHP Cloner was created to solve the problem of manually recreating Discord server structures. As an experienced Discord server administrator, I found the process of setting up new servers time-consuming and repetitive.</p>
-                    <p>This tool automates the process of cloning server roles, channels, and permissions, saving server admins hours of work. All operations are performed locally on your device for maximum security.</p>
-                    <p>Join our community to get support, suggest features, and stay updated on new releases.</p>
+                    <p>This tool automates the process of cloning server roles and channels, saving server admins hours of work. All operations are performed locally on your device for maximum security.</p>
+                    <p>Join our Discord community to get support and suggest new features!</p>
                     
                     <div class="social-links">
                         <a href="https://discord.gg/QYhtNsGEbj" class="social-link" target="_blank">
                             <i class="fab fa-discord"></i>
                         </a>
-                        <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                        <a href="https://github.com/ghostgamer" class="social-link" target="_blank">
                             <i class="fab fa-github"></i>
                         </a>
                         <a href="https://twitter.com/ghstgmr" class="social-link" target="_blank">
@@ -846,7 +570,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>GHP Cloner</h3>
-                    <p>The ultimate tool for Discord server cloning. Save time and effort when setting up new Discord communities.</p>
+                    <p>The ultimate free tool for Discord server cloning. Save time and effort when setting up new Discord communities.</p>
                 </div>
                 
                 <div class="footer-column">
@@ -855,7 +579,7 @@
                         <li><a href="#home">Home</a></li>
                         <li><a href="#features">Features</a></li>
                         <li><a href="#download">Download</a></li>
-                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#about">About</a></li>
                     </ul>
                 </div>
                 
@@ -865,7 +589,6 @@
                         <li><a href="#">Documentation</a></li>
                         <li><a href="#">Support</a></li>
                         <li><a href="#">Changelog</a></li>
-                        <li><a href="#">License Agreement</a></li>
                     </ul>
                 </div>
                 
@@ -874,7 +597,6 @@
                     <ul class="footer-links">
                         <li><a href="#">Terms of Service</a></li>
                         <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Refund Policy</a></li>
                     </ul>
                 </div>
             </div>
@@ -886,14 +608,6 @@
     </footer>
 
     <script>
-        // Initialize KeyAuth
-        const keyauth = new KeyAuth(
-            "GHPCloner", // Application Name
-            "nA1OTtQRhr", // OwnerID
-            "1.1.0", // Application Version
-            "https://keyauth.com/api/1.2/" // KeyAuth API URL
-        );
-        
         // Mobile menu toggle
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             document.getElementById('navMenu').classList.toggle('show');
@@ -920,44 +634,6 @@
             });
         });
         
-        // Verify license key
-        document.getElementById('verifyBtn').addEventListener('click', function() {
-            const username = document.getElementById('keyauth-username').value;
-            const license = document.getElementById('keyauth-license').value;
-            const statusMessage = document.getElementById('statusMessage');
-            
-            if(!username || !license) {
-                statusMessage.textContent = "Please enter both username and license key";
-                statusMessage.className = "status-message status-error";
-                return;
-            }
-            
-            // Show loading state
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
-            this.disabled = true;
-            
-            // Verify with KeyAuth
-            keyauth.verify(license, function(response) {
-                if(response.success) {
-                    statusMessage.textContent = "License verified successfully! Download will start shortly...";
-                    statusMessage.className = "status-message status-success";
-                    
-                    // Simulate download (replace with actual download link)
-                    setTimeout(function() {
-                        window.location.href = "#";
-                        alert("Download would start here. In a real implementation, this would download the GHP Cloner APK file.");
-                    }, 2000);
-                } else {
-                    statusMessage.textContent = "Error: " + (response.message || "Invalid license key");
-                    statusMessage.className = "status-message status-error";
-                    
-                    // Reset button
-                    document.getElementById('verifyBtn').innerHTML = '<i class="fas fa-key"></i> Verify & Download';
-                    document.getElementById('verifyBtn').disabled = false;
-                }
-            }, username);
-        });
-        
         // Update active nav link on scroll
         window.addEventListener('scroll', function() {
             const sections = document.querySelectorAll('section');
@@ -977,14 +653,6 @@
                 if(link.getAttribute('href').substring(1) === current) {
                     link.classList.add('active');
                 }
-            });
-        });
-        
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                faqItem.classList.toggle('active');
             });
         });
     </script>
