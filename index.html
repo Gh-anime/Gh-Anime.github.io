@@ -1,125 +1,698 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Portfolio — ypkayla</title>
-<meta name="description" content="Professional single-file portfolio that fetches GitHub data and displays projects, skills and contact info. Single HTML file with embedded CSS and JS." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ypkayla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gray: {
+                            850: '#0a0a0a',
+                            900: '#050505',
+                            950: '#000000'
+                        }
+                    },
+                    fontFamily: {
+                        'mono': ['"IBM Plex Mono"', 'monospace'],
+                        'sans': ['Inter', '-apple-system', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'pulse-subtle': 'pulse 3s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: 0 },
+                            '100%': { opacity: 1 }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(10px)', opacity: 0 },
+                            '100%': { transform: 'translateY(0)', opacity: 1 }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #000000;
+            color: #ededed;
+        }
+        
+        ::selection {
+            background: rgba(59, 130, 246, 0.3);
+        }
+        
+        .vanta-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .code-block {
+            background: #0a0a0a;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 8px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+        }
+        
+        .gradient-border {
+            position: relative;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(10px);
+        }
+        
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            padding: 1px;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+        
+        .project-card {
+            transition: all 0.2s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-2px);
+            background: rgba(10, 10, 10, 0.8);
+        }
+        
+        .skill-tag {
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            font-size: 13px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+        }
+        
+        .skill-tag:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+        
+        .year-badge {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: #8a8a8a;
+            background: rgba(20, 20, 20, 0.8);
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .float {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .stat-card {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <!-- Vanta.js Background Container -->
+    <div id="vanta-bg" class="vanta-container"></div>
 
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-md border-b border-gray-900/50">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-14">
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-blue-500 animate-pulse-subtle"></div>
+                        <span class="font-mono text-sm">ypkayla</span>
+                    </div>
+                    <div class="flex gap-6 text-sm">
+                        <a href="#projects" class="text-gray-300 hover:text-white transition">projects</a>
+                        <a href="#github" class="text-gray-300 hover:text-white transition">github</a>
+                        <a href="#about" class="text-gray-300 hover:text-white transition">about</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-<style>
-/* =====================
-Professional Single-file Portfolio CSS
-Large, organized, commented and responsive
-===================== */
+        <!-- Hero -->
+        <section class="min-h-screen pt-14 flex items-center fade-in">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-3">
+                            <div class="year-badge">16</div>
+                            <div class="year-badge">developer</div>
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold">
+                            <div class="text-gray-300">building things,</div>
+                            <div class="text-white mt-2">exploring tech.</div>
+                        </h1>
+                        
+                        <p class="text-lg text-gray-300 max-w-2xl">
+                            Working on machine learning implementations, automation tools, and 
+                            whatever else seems interesting. Building things to solve problems 
+                            and understand how stuff works.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-3 pt-4">
+                            <div class="skill-tag">python</div>
+                            <div class="skill-tag">reinforcement learning</div>
+                            <div class="skill-tag">pytorch</div>
+                            <div class="skill-tag">javascript</div>
+                            <div class="skill-tag">fastapi</div>
+                            <div class="skill-tag">docker</div>
+                        </div>
+                        
+                        <div class="pt-8 flex gap-4">
+                            <a href="#projects" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg transition hover:glow">
+                                see projects
+                            </a>
+                            <a href="https://github.com/ypkayla" target="_blank" class="px-5 py-2.5 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-lg transition flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                github
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="gradient-border p-8 rounded-xl">
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 rounded-full bg-green-500 float"></div>
+                                <h3 class="text-xl font-semibold">current work</h3>
+                            </div>
+                            <p class="text-gray-300">
+                                Implementing reinforcement learning algorithms and building tools 
+                                around ML workflows. Focusing on practical applications and 
+                                efficient code.
+                            </p>
+                            <div class="space-y-4 pt-4">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-2">
+                                        <span class="text-gray-400">RL framework</span>
+                                        <span class="text-blue-400">active</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-2">
+                                        <div class="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-2">
+                                        <span class="text-gray-400">automation tools</span>
+                                        <span class="text-green-400">ongoing</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-2">
+                                        <div class="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Projects -->
+        <section id="projects" class="py-20">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-16">
+                    <h2 class="text-3xl font-bold mb-4">projects</h2>
+                    <p class="text-gray-400 max-w-2xl">Things I'm building and experimenting with</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="project-card gradient-border p-6 rounded-xl">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                            <h3 class="text-xl font-semibold">RL Implementation</h3>
+                        </div>
+                        <p class="text-gray-300 mb-4">
+                            Building reinforcement learning algorithms from scratch with PyTorch.
+                            Currently working on PPO and DQN implementations for various Gym
+                            environments.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <div class="skill-tag">pytorch</div>
+                            <div class="skill-tag">gymnasium</div>
+                            <div class="skill-tag">reinforcement learning</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card gradient-border p-6 rounded-xl">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <h3 class="text-xl font-semibold">ML Tools</h3>
+                        </div>
+                        <p class="text-gray-300 mb-4">
+                            Creating utilities for data processing, model evaluation, and
+                            experiment tracking. Focus on reusable components that simplify
+                            ML workflows.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <div class="skill-tag">python</div>
+                            <div class="skill-tag">fastapi</div>
+                            <div class="skill-tag">data pipelines</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card gradient-border p-6 rounded-xl">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-purple-500"></div>
+                            <h3 class="text-xl font-semibold">Web Automation</h3>
+                        </div>
+                        <p class="text-gray-300 mb-4">
+                            Developing scripts and tools for automating repetitive web tasks.
+                            Using async programming and browser automation to handle
+                            data collection workflows.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <div class="skill-tag">python</div>
+                            <div class="skill-tag">playwright</div>
+                            <div class="skill-tag">async</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card gradient-border p-6 rounded-xl">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <h3 class="text-xl font-semibold">Utility Scripts</h3>
+                        </div>
+                        <p class="text-gray-300 mb-4">
+                            Collection of practical scripts for various tasks - file management,
+                            data conversion, system monitoring, and other automation needs.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <div class="skill-tag">bash</div>
+                            <div class="skill-tag">python</div>
+                            <div class="skill-tag">system tools</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-:root{
---bg: #0f1724; /* dark **/
---card: #0b1220;
---muted: #98a0ad;
---accent: #4f46e5; /* indigo */
---accent-2: #06b6d4; /* teal */
---glass: rgba(255,255,255,0.04);
---radius: 12px;
---maxw: 1100px;
---fw-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-color-scheme: dark;
-}
+        <!-- GitHub Stats -->
+        <section id="github" class="py-20">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold mb-4">github activity</h2>
+                    <p class="text-gray-400">Code and contributions</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                    <div class="stat-card rounded-xl p-6 text-center">
+                        <div id="repoCount" class="text-3xl font-bold mb-2 text-blue-400">--</div>
+                        <div class="text-sm text-gray-400">repositories</div>
+                    </div>
+                    <div class="stat-card rounded-xl p-6 text-center">
+                        <div id="starCount" class="text-3xl font-bold mb-2 text-green-400">--</div>
+                        <div class="text-sm text-gray-400">stars</div>
+                    </div>
+                    <div class="stat-card rounded-xl p-6 text-center">
+                        <div id="langCount" class="text-3xl font-bold mb-2 text-purple-400">--</div>
+                        <div class="text-sm text-gray-400">languages</div>
+                    </div>
+                    <div class="stat-card rounded-xl p-6 text-center">
+                        <div id="followersCount" class="text-3xl font-bold mb-2 text-yellow-400">--</div>
+                        <div class="text-sm text-gray-400">followers</div>
+                    </div>
+                </div>
+                
+                <div class="gradient-border rounded-xl p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold">recent activity</h3>
+                        <span class="text-sm text-gray-500">github</span>
+                    </div>
+                    <div id="activity" class="space-y-4">
+                        <div class="text-gray-500 text-sm">loading activity...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- About -->
+        <section id="about" class="py-20">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6">about</h2>
+                        <div class="space-y-6 text-gray-300">
+                            <p>
+                                Building software to solve problems and automate things.
+                                Currently focused on machine learning implementations and
+                                practical tool development.
+                            </p>
+                            <p>
+                                not many of my projects are dumped on GitHub - uhh yeah.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="gradient-border rounded-xl p-6">
+                            <h3 class="text-lg font-semibold mb-4">resources</h3>
+                            <div class="space-y-3 text-sm">
+                                <a href="https://github.com/pytorch/tutorials" target="_blank" class="flex items-center gap-3 text-gray-400 hover:text-white transition group">
+                                    <div class="w-8 h-8 rounded bg-gray-900 group-hover:bg-gray-800 flex items-center justify-center">
+                                        <span class="text-blue-400">PT</span>
+                                    </div>
+                                    <span>PyTorch Docs</span>
+                                </a>
+                                <a href="https://www.youtube.com/@3blue1brown" target="_blank" class="flex items-center gap-3 text-gray-400 hover:text-white transition group">
+                                    <div class="w-8 h-8 rounded bg-gray-900 group-hover:bg-gray-800 flex items-center justify-center">
+                                        <span class="text-green-400">3B1B</span>
+                                    </div>
+                                    <span>3Blue1Brown</span>
+                                </a>
+                                <a href="https://fast.ai" target="_blank" class="flex items-center gap-3 text-gray-400 hover:text-white transition group">
+                                    <div class="w-8 h-8 rounded bg-gray-900 group-hover:bg-gray-800 flex items-center justify-center">
+                                        <span class="text-purple-400">FA</span>
+                                    </div>
+                                    <span>fast.ai</span>
+                                </a>
+                                <a href="https://kaggle.com" target="_blank" class="flex items-center gap-3 text-gray-400 hover:text-white transition group">
+                                    <div class="w-8 h-8 rounded bg-gray-900 group-hover:bg-gray-800 flex items-center justify-center">
+                                        <span class="text-yellow-400">KG</span>
+                                    </div>
+                                    <span>Kaggle</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="gradient-border rounded-xl p-6">
+                            <h3 class="text-lg font-semibold mb-4">contact</h3>
+                            <div class="space-y-3 text-sm">
+                                <a href="placeholder...a" target="_blank" class="flex items-center gap-3 text-gray-400 hover:text-white transition">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                    <span>github/ypkayla</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-/* Reset & base */
-*,*::before,*::after{box-sizing:border-box}
-html,body{height:100%}
-body{
-margin:0;
-font-family:var(--fw-sans);
-background: linear-gradient(180deg,#071028 0%, #051021 40%) fixed;
-color: #e6eef8;
--webkit-font-smoothing:antialiased;
--moz-osx-font-smoothing:grayscale;
-line-height:1.45;
-padding-bottom:4rem;
-}
-a{color:var(--accent)}
-a:focus{outline:3px solid color-mix(in srgb, var(--accent) 30%, transparent); outline-offset:2px}
+        <!-- Code Example -->
+        <section class="py-20">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="code-block p-6 glow">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-sm text-gray-500 font-mono">ppo_agent.py</div>
+                        <div class="text-xs text-gray-600">implementation</div>
+                    </div>
+                    <pre class="text-gray-300 font-mono text-sm overflow-x-auto">
+<span class="text-blue-400">class</span> <span class="text-yellow-300">PPOAgent</span>:
+    
+    <span class="text-blue-400">def</span> <span class="text-yellow-300">__init__</span>(<span class="text-green-400">self</span>, policy_net, value_net, 
+                 lr=<span class="text-orange-400">3e-4</span>, clip_epsilon=<span class="text-orange-400">0.2</span>):
+        <span class="text-green-400">self</span>.policy = policy_net
+        <span class="text-green-400">self</span>.value = value_net
+        <span class="text-green-400">self</span>.optimizer = Adam(<span class="text-green-400">self</span>.parameters(), lr=lr)
+        <span class="text-green-400">self</span>.clip_epsilon = clip_epsilon
+        
+    <span class="text-blue-400">def</span> <span class="text-yellow-300">update</span>(<span class="text-green-400">self</span>, batch):
+        states, actions, old_log_probs, returns, advantages = batch
+        
+        <span class="text-green-400">for</span> _ <span class="text-green-400">in</span> range(<span class="text-orange-400">self</span>.update_epochs):
+            new_log_probs, entropy = <span class="text-green-400">self</span>._evaluate_actions(states, actions)
+            state_values = <span class="text-green-400">self</span>.value(states)
+            
+            <span class="text-gray-600"># PPO clipped objective</span>
+            ratios = (new_log_probs - old_log_probs).exp()
+            surr1 = ratios * advantages
+            surr2 = ratios.clamp(<span class="text-orange-400">1</span> - <span class="text-green-400">self</span>.clip_epsilon,
+                                <span class="text-orange-400">1</span> + <span class="text-green-400">self</span>.clip_epsilon) * advantages
+            policy_loss = -torch.min(surr1, surr2).mean()
+            
+            value_loss = F.mse_loss(state_values, returns)
+            entropy_loss = -entropy.mean() * <span class="text-green-400">self</span>.entropy_coef
+            
+            total_loss = policy_loss + value_loss + entropy_loss
+            
+            <span class="text-green-400">self</span>.optimizer.zero_grad()
+            total_loss.backward()
+            torch.nn.utils.clip_grad_norm_(<span class="text-green-400">self</span>.parameters(), <span class="text-orange-400">0.5</span>)
+            <span class="text-green-400">self</span>.optimizer.step()
+            
+        <span class="text-green-400">return</span> {
+            <span class="text-yellow-300">'policy_loss'</span>: policy_loss.item(),
+            <span class="text-yellow-300">'value_loss'</span>: value_loss.item()
+        }</pre>
+                </div>
+            </div>
+        </section>
 
+        <!-- Footer -->
+        <footer class="py-8 border-t border-gray-900/50">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                            <span class="font-mono text-sm">ypkayla</span>
+                        </div>
+                    </div>
+                    
+                    <div class="text-sm text-gray-500">
+                        <a href="https://github.com/ypkayla" target="_blank" class="hover:text-white transition">github</a>
+                        <span class="mx-2">•</span>
+                        <span id="currentYear"></span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
-/* Layout shell */
-.container{max-width:var(--maxw);margin:2rem auto;padding:1.5rem}
-.row{display:grid;gap:1.25rem}
-.cols-2{grid-template-columns: 1fr 380px}
-@media (max-width:980px){ .cols-2{grid-template-columns:1fr} }
-
-
-/* Top navigation */
-header {
-position:sticky; top:0; z-index:60;
-backdrop-filter: blur(6px);
-background: linear-gradient(180deg, rgba(7,12,36,0.58), rgba(7,12,36,0.28));
-border-bottom:1px solid rgba(255,255,255,0.03);
-}
-nav.container {display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem}
-.brand {display:flex;align-items:center;gap:0.9rem}
-.logo {
-width:46px;height:46px;border-radius:10px;flex:0 0 46px;
-background: linear-gradient(135deg,var(--accent), var(--accent-2));
-display:inline-grid;place-items:center;font-weight:700;color:#fff;
-box-shadow:0 8px 30px rgba(79,70,229,0.14), inset 0 -6px 12px rgba(0,0,0,0.2);
-}
-.brand h1{font-size:1.05rem;margin:0}
-.brand p{font-size:0.78rem;color:var(--muted);margin-top:2px}
-
-
-.nav-actions{display:flex;gap:0.6rem;align-items:center}
-.btn {
-background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04);
-padding:0.45rem 0.7rem;border-radius:9px;font-weight:600;font-size:0.9rem;cursor:pointer;
-}
-.btn.primary {background:linear-gradient(90deg,var(--accent), #8b5cf6); color:white; border:none; box-shadow:0 6px 18px rgba(79,70,229,0.12)}
-.btn.icon {display:inline-grid;place-items:center;padding:0.4rem;width:40px;height:40px}
-
-
-/* Hero */
-.hero{display:grid;grid-template-columns:1fr 300px;gap:1.25rem;align-items:center;margin-top:1.5rem}
-@media (max-width:980px){ .hero{grid-template-columns:1fr} }
-.hero-card{
-background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-border-radius: var(--radius); padding:1.6rem; box-shadow: 0 8px 30px rgba(2,6,23,0.6);
-border: 1px solid rgba(255,255,255,0.03);
-}
-.hero-title{font-size:1.9rem;margin-bottom:0.35rem;letter-spacing:-0.6px}
-.hero-sub{color:var(--muted);margin-bottom:1rem}
-.hero-intro{margin-top:0.8rem;color:#cfe7ff}
-.hero-meta{display:flex;gap:0.7rem;flex-wrap:wrap;margin-top:1rem}
-.chip{background:var(--glass);padding:0.45rem 0.7rem;border-radius:999px;font-weight:600;font-size:0.85rem;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
-
-
-/* Avatar card */
-.profile-card{display:flex;flex-direction:column;align-items:center;gap:0.8rem;padding:1rem;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
-.avatar{
-width:160px;height:160px;border-radius:18px; background:linear-gradient(180deg,#152238,#0b1a2b);
-display:grid;place-items:center;font-size:2.2rem;font-weight:700;color:#fff;border:1px solid rgba(255,255,255,0.04)
-}
-.stat-row{display:flex;gap:0.6rem;align-items:center}
-.stat{display:flex;flex-direction:column;align-items:center;padding:0.5rem 0.8rem;border-radius:10px;background:rgba(255,255,255,0.02);font-weight:700}
-.stat small{font-weight:600;color:var(--muted);font-size:0.78rem}
-
-
-/* Skills + timeline + projects area */
-.card{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:1rem; border:1px solid rgba(255,255,255,0.03)}
-.section-title{display:flex;align-items:center;gap:0.9rem;margin-bottom:1rem}
-.section-title h2{margin:0;font-size:1.25rem;color:var(--accent)}
-.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0.8rem}
-.skill{
-background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-padding:0.65rem;border-radius:8px;border:1px solid rgba(255,255,255,0.02);
-display:flex;align-items:center;gap:0.75rem;
-}
-.skill .dot{width:36px;height:36px;border-radius:8px;display:grid;place-items:center;font-weight:700;background:rgba(255,255,255,0.02)}
-
-
-/* Timeline */
-.timeline{display:flex;flex-direction:column;gap:0.7rem}
-.timeline-item{display:flex;gap:0.9rem;align-items:flex-start}
+    <script>
+        // Initialize Vanta.js background
+        let vantaEffect;
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof VANTA !== 'undefined') {
+                vantaEffect = VANTA.NET({
+                    el: "#vanta-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0x3b82f6,
+                    backgroundColor: 0x000000,
+                    points: 12.00,
+                    maxDistance: 18.00,
+                    spacing: 16.00
+                });
+            }
+            
+            const GITHUB_USERNAME = 'ypkayla';
+            
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Format date for activity
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                const now = new Date();
+                const diff = now - date;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                
+                if (days === 0) return 'today';
+                if (days === 1) return 'yesterday';
+                if (days < 7) return `${days} days ago`;
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            }
+            
+            // Fetch GitHub data
+            async function fetchGitHubData() {
+                try {
+                    // User data
+                    const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+                    const userData = await userRes.json();
+                    
+                    // Repos data
+                    const reposRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`);
+                    const reposData = reposRes.ok ? await reposRes.json() : [];
+                    
+                    // Events for activity
+                    const eventsRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events?per_page=5`);
+                    const eventsData = eventsRes.ok ? await eventsRes.json() : [];
+                    
+                    // Update stats
+                    document.getElementById('repoCount').textContent = userData.public_repos || '--';
+                    document.getElementById('followersCount').textContent = userData.followers || '--';
+                    
+                    const stars = reposData.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+                    document.getElementById('starCount').textContent = stars || '--';
+                    
+                    const languages = new Set(reposData.map(repo => repo.language).filter(Boolean));
+                    document.getElementById('langCount').textContent = languages.size || '--';
+                    
+                    // Update activity
+                    updateActivity(eventsData);
+                    
+                } catch (error) {
+                    console.log('GitHub data unavailable, using placeholders');
+                    document.getElementById('repoCount').textContent = '--';
+                    document.getElementById('starCount').textContent = '--';
+                    document.getElementById('langCount').textContent = '--';
+                    document.getElementById('followersCount').textContent = '--';
+                    
+                    document.getElementById('activity').innerHTML = `
+                        <div class="text-gray-500 text-sm">
+                            Activity data currently unavailable
+                        </div>
+                    `;
+                }
+            }
+            
+            // Update activity section
+            function updateActivity(eventsData) {
+                const activityContainer = document.getElementById('activity');
+                
+                if (!eventsData || eventsData.length === 0) {
+                    activityContainer.innerHTML = `
+                        <div class="text-gray-500 text-sm">
+                            No recent public activity
+                        </div>
+                    `;
+                    return;
+                }
+                
+                activityContainer.innerHTML = eventsData.slice(0, 5).map(event => {
+                    let action = '';
+                    let repoName = event.repo?.name?.split('/')[1] || 'repository';
+                    let icon = '📁';
+                    let color = 'text-gray-300';
+                    
+                    switch(event.type) {
+                        case 'PushEvent':
+                            action = `Pushed ${event.payload?.size || 'changes'} to`;
+                            icon = '⬆️';
+                            color = 'text-green-400';
+                            break;
+                        case 'CreateEvent':
+                            action = `Created ${event.payload?.ref_type || 'resource'} in`;
+                            icon = '✨';
+                            color = 'text-blue-400';
+                            break;
+                        case 'WatchEvent':
+                            action = 'Starred';
+                            icon = '⭐';
+                            color = 'text-yellow-400';
+                            break;
+                        case 'ForkEvent':
+                            action = 'Forked';
+                            icon = '🍴';
+                            color = 'text-purple-400';
+                            break;
+                        default:
+                            action = 'Updated';
+                            icon = '📝';
+                    }
+                    
+                    return `
+                        <div class="flex justify-between items-center text-sm">
+                            <div class="flex items-center gap-3">
+                                <span>${icon}</span>
+                                <span class="${color}">${action} <span class="font-mono">${repoName}</span></span>
+                            </div>
+                            <span class="text-gray-500">${formatDate(event.created_at)}</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            // Initialize
+            fetchGitHubData();
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Animate stat cards on load
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100 + 300);
+            });
+        });
+        
+        // Clean up Vanta.js on page unload
+        window.addEventListener('beforeunload', function() {
+            if (vantaEffect) {
+                vantaEffect.destroy();
+            }
+        });
+    </script>
+</body>
 </html>
